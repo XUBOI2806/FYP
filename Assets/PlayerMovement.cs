@@ -3,8 +3,12 @@ using System.Collections.Generic;
 using Unity.VisualScripting.Antlr3.Runtime.Tree;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 public class PlayerMovement : MonoBehaviour
 {
+    // store the right foot for kicking actions
+    public GameObject RightFoot;
+
     // Start is called before the first frame update
     Animator animator;
     int isWalkingHash;
@@ -22,7 +26,8 @@ public class PlayerMovement : MonoBehaviour
     bool sideKickPressed;
     bool laceKickPressed;
 
-    // string to store button pressed
+    // string to store restart button pressed
+    bool restartPressed;
 
     // Awake is called when script is being loaded
     private void Awake()
@@ -49,6 +54,11 @@ public class PlayerMovement : MonoBehaviour
         {
             laceKickPressed = ctx.ReadValueAsButton();
         };
+
+        input.CharacterControls.Restart.performed += ctx =>
+        {
+            restartPressed = ctx.ReadValueAsButton();
+        };
     }
 
     void onMovementInput(InputAction.CallbackContext ctx)
@@ -71,28 +81,49 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log("Side Kick Pressed?: " + sideKickPressed);
+
+        // ad hoc fix to prevent player from sinking
+        Vector3 currentPosition = transform.position;
+        currentPosition.y = 0;
+        transform.position = currentPosition;
+
+        // call handlers for all inputs
         handleRotation();
         handleMovement();
         handleShoot();
+        handleRestart();
+    }
+
+    void handleRestart()
+    {
+        if (restartPressed)
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        }
     }
 
     void handleShoot()
     {
         if(sideKickPressed)
         {
+            Debug.Log("Side Kick Pressed");
+            RightFoot.GetComponent<KickBall>().enableSideKicking();
             animator.SetBool(isSideKickingHash, true);
         }
         if(!sideKickPressed)
         {
+            RightFoot.GetComponent<KickBall>().disableSideKicking();
             animator.SetBool(isSideKickingHash, false);
         }
         if(laceKickPressed)
         {
+            Debug.Log("Lace Kick Pressed");
+            RightFoot.GetComponent<KickBall>().enableLaceKicking();
             animator.SetBool(isLaceKickingHash, true);
         }
         if (!laceKickPressed)
         {
+            RightFoot.GetComponent<KickBall>().disableLaceKicking();
             animator.SetBool(isLaceKickingHash, false);
         }
     }

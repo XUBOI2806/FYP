@@ -80,6 +80,15 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": ""Press(behavior=2)"",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Restart"",
+                    ""type"": ""Button"",
+                    ""id"": ""10d41e73-810e-4d57-be38-647d359cb569"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -333,6 +342,17 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": ""Keyboard&Mouse"",
                     ""action"": ""Lace Kick"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""88f5e95e-2e58-46a8-9088-dd19f28ab9ba"",
+                    ""path"": ""<Keyboard>/r"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Restart"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -926,6 +946,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         m_CharacterControls_Run = m_CharacterControls.FindAction("Run", throwIfNotFound: true);
         m_CharacterControls_SideKick = m_CharacterControls.FindAction("Side Kick", throwIfNotFound: true);
         m_CharacterControls_LaceKick = m_CharacterControls.FindAction("Lace Kick", throwIfNotFound: true);
+        m_CharacterControls_Restart = m_CharacterControls.FindAction("Restart", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -1005,6 +1026,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
     private readonly InputAction m_CharacterControls_Run;
     private readonly InputAction m_CharacterControls_SideKick;
     private readonly InputAction m_CharacterControls_LaceKick;
+    private readonly InputAction m_CharacterControls_Restart;
     public struct CharacterControlsActions
     {
         private @PlayerInput m_Wrapper;
@@ -1015,6 +1037,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         public InputAction @Run => m_Wrapper.m_CharacterControls_Run;
         public InputAction @SideKick => m_Wrapper.m_CharacterControls_SideKick;
         public InputAction @LaceKick => m_Wrapper.m_CharacterControls_LaceKick;
+        public InputAction @Restart => m_Wrapper.m_CharacterControls_Restart;
         public InputActionMap Get() { return m_Wrapper.m_CharacterControls; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -1042,6 +1065,9 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
             @LaceKick.started += instance.OnLaceKick;
             @LaceKick.performed += instance.OnLaceKick;
             @LaceKick.canceled += instance.OnLaceKick;
+            @Restart.started += instance.OnRestart;
+            @Restart.performed += instance.OnRestart;
+            @Restart.canceled += instance.OnRestart;
         }
 
         private void UnregisterCallbacks(ICharacterControlsActions instance)
@@ -1064,6 +1090,9 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
             @LaceKick.started -= instance.OnLaceKick;
             @LaceKick.performed -= instance.OnLaceKick;
             @LaceKick.canceled -= instance.OnLaceKick;
+            @Restart.started -= instance.OnRestart;
+            @Restart.performed -= instance.OnRestart;
+            @Restart.canceled -= instance.OnRestart;
         }
 
         public void RemoveCallbacks(ICharacterControlsActions instance)
@@ -1252,6 +1281,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         void OnRun(InputAction.CallbackContext context);
         void OnSideKick(InputAction.CallbackContext context);
         void OnLaceKick(InputAction.CallbackContext context);
+        void OnRestart(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {

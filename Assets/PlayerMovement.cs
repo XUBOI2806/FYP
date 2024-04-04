@@ -83,9 +83,11 @@ public class PlayerMovement : MonoBehaviour
     {
 
         // ad hoc fix to prevent player from sinking
+        /*
         Vector3 currentPosition = transform.position;
         currentPosition.y = 0;
         transform.position = currentPosition;
+        */
 
         // call handlers for all inputs
         handleRotation();

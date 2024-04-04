@@ -35,7 +35,7 @@ public class KickBall : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if(collision.gameObject.tag == "Ball")
+        if(collision.gameObject.tag == "Ball" || collision.gameObject.tag == "ball")
         {
             Debug.Log("Ball Detected");
             if(isLaceKicking)
@@ -43,11 +43,16 @@ public class KickBall : MonoBehaviour
                 Debug.Log("Lace Kick");
                 collision.gameObject.GetComponent<Rigidbody>().AddForce(velocity.x * 50, velocity.magnitude * 50, velocity.z * 50);
             }
-            if(isSideKicking)
+            else if(isSideKicking)
             {
                 Debug.Log("Side Kick");
                 collision.gameObject.GetComponent<Rigidbody>().AddForce(velocity.x * 50, 0, velocity.z * 50);
             }
+            else
+            {
+                collision.gameObject.GetComponent<Rigidbody>().AddForce(velocity.x * 5, 0, velocity.z * 5);
+            }
+
         }
     }
 

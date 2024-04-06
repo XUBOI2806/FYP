@@ -29,6 +29,13 @@ public class PlayerMovement : MonoBehaviour
     // string to store restart button pressed
     bool restartPressed;
 
+    // varied distance bool
+    bool setPiece1Pressed;
+    bool setPiece2Pressed;
+
+    // reference to ball and camera
+    public GameObject ball;
+    
     // Awake is called when script is being loaded
     private void Awake()
     {
@@ -58,6 +65,19 @@ public class PlayerMovement : MonoBehaviour
         input.CharacterControls.Restart.performed += ctx =>
         {
             restartPressed = ctx.ReadValueAsButton();
+        };
+
+
+        // input for changing distances
+        input.CharacterControls.SetPiece1.performed += ctx =>
+        {
+            setPiece1Pressed = ctx.ReadValueAsButton();
+
+        };
+
+        input.CharacterControls.SetPiece2.performed += ctx =>
+        {
+            setPiece2Pressed = ctx.ReadValueAsButton();
         };
     }
 
@@ -92,6 +112,7 @@ public class PlayerMovement : MonoBehaviour
         handleMovement();
         handleShoot();
         handleRestart();
+        HandleInitialPosition();
     }
 
     void handleRestart()
@@ -186,6 +207,30 @@ public class PlayerMovement : MonoBehaviour
         {
             animator.SetBool(isRunningHash, false);
         }
+    }
+
+    private void HandleInitialPosition()
+    {
+        // changes the positions for player and goal to simulate varied distances
+        Vector3 setPiece1Pos = new Vector3(-12, 1, 4); // Penalty
+
+        Vector3 setPiece2Pos = new Vector3(1, 1, 15); // Free kick
+
+        if (setPiece1Pressed)
+        {
+            ball.transform.position = setPiece1Pos;
+            transform.position = new Vector3(-11, 1, 4);
+            
+            setPiece1Pressed = false;
+        }
+
+        if (setPiece2Pressed)
+        {
+            ball.transform.position = setPiece2Pos;
+            transform.position = new Vector3(2, 1, 15);
+            setPiece2Pressed = false;
+        }
+
     }
 
     private void OnEnable()

@@ -7,7 +7,7 @@ using UnityEngine.SceneManagement;
 public class PlayerMovement : MonoBehaviour
 {
     // store the right foot for kicking actions
-    public GameObject RightFoot;
+    public GameObject RightShoe;
 
     // Start is called before the first frame update
     Animator animator;
@@ -107,23 +107,23 @@ public class PlayerMovement : MonoBehaviour
         if(sideKickPressed)
         {
             Debug.Log("Side Kick Pressed");
-            RightFoot.GetComponent<KickBall>().enableSideKicking();
+            RightShoe.GetComponent<KickBall>().enableSideKicking();
             animator.SetBool(isSideKickingHash, true);
         }
         if(!sideKickPressed)
         {
-            RightFoot.GetComponent<KickBall>().disableSideKicking();
+            RightShoe.GetComponent<KickBall>().disableSideKicking();
             animator.SetBool(isSideKickingHash, false);
         }
         if(laceKickPressed)
         {
             Debug.Log("Lace Kick Pressed");
-            RightFoot.GetComponent<KickBall>().enableLaceKicking();
+            RightShoe.GetComponent<KickBall>().enableLaceKicking();
             animator.SetBool(isLaceKickingHash, true);
         }
         if (!laceKickPressed)
         {
-            RightFoot.GetComponent<KickBall>().disableLaceKicking();
+            RightShoe.GetComponent<KickBall>().disableLaceKicking();
             animator.SetBool(isLaceKickingHash, false);
         }
     }

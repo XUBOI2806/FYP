@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class KickBall : MonoBehaviour
 {
-    public GameObject shoe;
     private Vector3 velocity;
     private Vector3 previous;
     private bool isLaceKicking;
@@ -22,11 +21,11 @@ public class KickBall : MonoBehaviour
     {
         if(!isLaceKicking && !isSideKicking)
         {
-            shoe.GetComponent<Collider>().enabled = false;
+            GetComponent<Collider>().enabled = false;
         }
         else
         {
-            shoe.GetComponent<Collider>().enabled = true;
+            GetComponent<Collider>().enabled = true;
         }
         velocity = ((transform.position - previous)) / Time.deltaTime;
         previous = transform.position;
@@ -41,12 +40,12 @@ public class KickBall : MonoBehaviour
             if(isLaceKicking)
             {
                 Debug.Log("Lace Kick");
-                collision.gameObject.GetComponent<Rigidbody>().AddForce(velocity.x * 50, velocity.magnitude * 50, velocity.z * 50);
+                collision.gameObject.GetComponent<Rigidbody>().AddForce(velocity.x * 30, velocity.magnitude * 10, velocity.z * 30);
             }
             if(isSideKicking)
             {
                 Debug.Log("Side Kick");
-                collision.gameObject.GetComponent<Rigidbody>().AddForce(velocity.x * 50, 0, velocity.z * 50);
+                collision.gameObject.GetComponent<Rigidbody>().AddForce(velocity.x * 20, 0, velocity.z * 20);
             }
         }
     }

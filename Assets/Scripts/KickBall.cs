@@ -45,7 +45,7 @@ public class KickBall : MonoBehaviour
             if(isSideKicking)
             {
                 Debug.Log("Side Kick");
-                collision.gameObject.GetComponent<Rigidbody>().AddForce(velocity.x * 20, 0, velocity.z * 20);
+                collision.gameObject.GetComponent<Rigidbody>().AddForce(velocity.x * 30, 0, velocity.z * 30);
             }
         }
     }

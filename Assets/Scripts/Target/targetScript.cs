@@ -5,25 +5,15 @@ using UnityEngine;
 public class targetScript : MonoBehaviour
 {
     GameObject target;
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    public ScoreManager ScoreManager;
+    
     private void OnTriggerEnter(Collider other)
     {
         if (other.name == "Ball")
         {
             Debug.Log("ball hit the target!");
             gameObject.GetComponent<Renderer>().material.color = new Color(0, 255, 0);
-                
+            ScoreManager.IncrementScore();
         }
     }
 

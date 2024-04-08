@@ -8,6 +8,13 @@ public class PlayerMovement : MonoBehaviour
 {
     // store the right foot for kicking actions
     public GameObject RightShoe;
+    public Vector3 PenaltyPosition;
+    public Quaternion PenaltyRotation;
+    public Vector3 PenaltyBallPosition;
+    public Vector3 FreeKickPosition;
+    public Quaternion FreeKickRotation;
+    public Vector3 FreeKickBallPosition;
+
 
     // Start is called before the first frame update
     Animator animator;
@@ -211,23 +218,20 @@ public class PlayerMovement : MonoBehaviour
 
     private void HandleInitialPosition()
     {
-        // changes the positions for player and goal to simulate varied distances
-        Vector3 setPiece1Pos = new Vector3(-12, 1, 4); // Penalty
-
-        Vector3 setPiece2Pos = new Vector3(1, 1, 15); // Free kick
-
         if (setPiece1Pressed)
         {
-            ball.transform.position = setPiece1Pos;
-            transform.position = new Vector3(-11, 1, 4);
+            ball.transform.position = FreeKickBallPosition;
+            transform.position = FreeKickPosition;
+            transform.rotation = FreeKickRotation;
             
             setPiece1Pressed = false;
         }
 
         if (setPiece2Pressed)
         {
-            ball.transform.position = setPiece2Pos;
-            transform.position = new Vector3(2, 1, 15);
+            ball.transform.position = PenaltyBallPosition;
+            transform.position = PenaltyPosition;
+            transform.rotation = PenaltyRotation;
             setPiece2Pressed = false;
         }
 

@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028326, g: 0.22571333, b: 0.30692202, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -931,7 +931,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: -8391222552659086748, guid: 9db873478215ebc4e90421ab8b7e16e8, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1326281495}
   m_SourcePrefab: {fileID: 100100000, guid: 9db873478215ebc4e90421ab8b7e16e8, type: 3}
 --- !u!1 &741140687 stripped
 GameObject:
@@ -963,6 +966,7 @@ MonoBehaviour:
   FreeKickRotation: {x: 0, y: 0, z: 0, w: 1}
   FreeKickBallPosition: {x: 7.52, y: 0.29, z: 11.99}
   ball: {fileID: 1074472946}
+  ballRigidBody: {fileID: 1074472948}
 --- !u!1 &826885477
 GameObject:
   m_ObjectHideFlags: 0
@@ -1472,6 +1476,33 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 741140690}
   m_SourcePrefab: {fileID: 100100000, guid: 4bcfcd43963b7cc44b7f2a9c390b4390, type: 3}
+--- !u!1 &1326281491 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -8391222552659086748, guid: 9db873478215ebc4e90421ab8b7e16e8, type: 3}
+  m_PrefabInstance: {fileID: 716850675}
+  m_PrefabAsset: {fileID: 0}
+--- !u!64 &1326281495
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1326281491}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -5495902117074765545, guid: 9db873478215ebc4e90421ab8b7e16e8, type: 3}
 --- !u!4 &1504266861 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -2072040086291044643, guid: 4bcfcd43963b7cc44b7f2a9c390b4390, type: 3}

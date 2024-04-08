@@ -89,6 +89,24 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Set Piece 1"",
+                    ""type"": ""Button"",
+                    ""id"": ""8ef11131-9a73-49c0-9d0a-0f376fb1e325"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Set Piece 2"",
+                    ""type"": ""Button"",
+                    ""id"": ""50734dc5-b3b9-4985-9d30-37385debd317"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -353,6 +371,28 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Restart"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""57e2d036-0be4-4eeb-972a-cb8224be390d"",
+                    ""path"": ""<Keyboard>/1"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Set Piece 1"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""a9a3f7c5-d1b8-45b8-8639-c362a4d0a4f9"",
+                    ""path"": ""<Keyboard>/2"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Set Piece 2"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -947,6 +987,8 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         m_CharacterControls_SideKick = m_CharacterControls.FindAction("Side Kick", throwIfNotFound: true);
         m_CharacterControls_LaceKick = m_CharacterControls.FindAction("Lace Kick", throwIfNotFound: true);
         m_CharacterControls_Restart = m_CharacterControls.FindAction("Restart", throwIfNotFound: true);
+        m_CharacterControls_SetPiece1 = m_CharacterControls.FindAction("Set Piece 1", throwIfNotFound: true);
+        m_CharacterControls_SetPiece2 = m_CharacterControls.FindAction("Set Piece 2", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -1027,6 +1069,8 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
     private readonly InputAction m_CharacterControls_SideKick;
     private readonly InputAction m_CharacterControls_LaceKick;
     private readonly InputAction m_CharacterControls_Restart;
+    private readonly InputAction m_CharacterControls_SetPiece1;
+    private readonly InputAction m_CharacterControls_SetPiece2;
     public struct CharacterControlsActions
     {
         private @PlayerInput m_Wrapper;
@@ -1038,6 +1082,8 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         public InputAction @SideKick => m_Wrapper.m_CharacterControls_SideKick;
         public InputAction @LaceKick => m_Wrapper.m_CharacterControls_LaceKick;
         public InputAction @Restart => m_Wrapper.m_CharacterControls_Restart;
+        public InputAction @SetPiece1 => m_Wrapper.m_CharacterControls_SetPiece1;
+        public InputAction @SetPiece2 => m_Wrapper.m_CharacterControls_SetPiece2;
         public InputActionMap Get() { return m_Wrapper.m_CharacterControls; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -1068,6 +1114,12 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
             @Restart.started += instance.OnRestart;
             @Restart.performed += instance.OnRestart;
             @Restart.canceled += instance.OnRestart;
+            @SetPiece1.started += instance.OnSetPiece1;
+            @SetPiece1.performed += instance.OnSetPiece1;
+            @SetPiece1.canceled += instance.OnSetPiece1;
+            @SetPiece2.started += instance.OnSetPiece2;
+            @SetPiece2.performed += instance.OnSetPiece2;
+            @SetPiece2.canceled += instance.OnSetPiece2;
         }
 
         private void UnregisterCallbacks(ICharacterControlsActions instance)
@@ -1093,6 +1145,12 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
             @Restart.started -= instance.OnRestart;
             @Restart.performed -= instance.OnRestart;
             @Restart.canceled -= instance.OnRestart;
+            @SetPiece1.started -= instance.OnSetPiece1;
+            @SetPiece1.performed -= instance.OnSetPiece1;
+            @SetPiece1.canceled -= instance.OnSetPiece1;
+            @SetPiece2.started -= instance.OnSetPiece2;
+            @SetPiece2.performed -= instance.OnSetPiece2;
+            @SetPiece2.canceled -= instance.OnSetPiece2;
         }
 
         public void RemoveCallbacks(ICharacterControlsActions instance)
@@ -1282,6 +1340,8 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         void OnSideKick(InputAction.CallbackContext context);
         void OnLaceKick(InputAction.CallbackContext context);
         void OnRestart(InputAction.CallbackContext context);
+        void OnSetPiece1(InputAction.CallbackContext context);
+        void OnSetPiece2(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {

@@ -42,6 +42,7 @@ public class PlayerMovement : MonoBehaviour
 
     // reference to ball and camera
     public GameObject ball;
+    public Rigidbody ballRigidBody;
     
     // Awake is called when script is being loaded
     private void Awake()
@@ -221,6 +222,7 @@ public class PlayerMovement : MonoBehaviour
         if (setPiece1Pressed)
         {
             ball.transform.position = FreeKickBallPosition;
+            ballRigidBody.velocity = new Vector3(0, 0, 0);
             transform.position = FreeKickPosition;
             transform.rotation = FreeKickRotation;
             

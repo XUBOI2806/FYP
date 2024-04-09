@@ -574,7 +574,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 8b4520ad5c1430c489d91e4bb94ca4d2, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 3.43
+      value: 7.52
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 8b4520ad5c1430c489d91e4bb94ca4d2, type: 3}
       propertyPath: m_LocalPosition.y
@@ -582,7 +582,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 8b4520ad5c1430c489d91e4bb94ca4d2, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 25.67
+      value: 11.99
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 8b4520ad5c1430c489d91e4bb94ca4d2, type: 3}
       propertyPath: m_LocalRotation.w
@@ -775,7 +775,7 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
@@ -844,7 +844,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ScoreManager: {fileID: 302760248}
-  fractured: {fileID: 5170800724414860432, guid: 93f4518643e5d44aba5ed5978af85f0c, type: 3}
 --- !u!1001 &716850675
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1117,7 +1116,7 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
@@ -1186,7 +1185,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ScoreManager: {fileID: 302760248}
-  fractured: {fileID: 5170800724414860432, guid: 93f4518643e5d44aba5ed5978af85f0c, type: 3}
 --- !u!1 &1074472946 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 8b4520ad5c1430c489d91e4bb94ca4d2, type: 3}
@@ -1412,7 +1410,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: 4bcfcd43963b7cc44b7f2a9c390b4390, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 2.83
+      value: 7.392
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 4bcfcd43963b7cc44b7f2a9c390b4390, type: 3}
       propertyPath: m_LocalPosition.y
@@ -1420,7 +1418,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 4bcfcd43963b7cc44b7f2a9c390b4390, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 19.11
+      value: 10.582
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 4bcfcd43963b7cc44b7f2a9c390b4390, type: 3}
       propertyPath: m_LocalRotation.w
@@ -1928,7 +1926,7 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
@@ -1997,7 +1995,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ScoreManager: {fileID: 302760248}
-  fractured: {fileID: 5170800724414860432, guid: 93f4518643e5d44aba5ed5978af85f0c, type: 3}
 --- !u!4 &1955666945 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -6874584590210671055, guid: 4bcfcd43963b7cc44b7f2a9c390b4390, type: 3}
@@ -2053,7 +2050,7 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
@@ -2122,7 +2119,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ScoreManager: {fileID: 302760248}
-  fractured: {fileID: 5170800724414860432, guid: 93f4518643e5d44aba5ed5978af85f0c, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

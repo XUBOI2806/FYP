@@ -232,6 +232,7 @@ public class PlayerMovement : MonoBehaviour
         if (setPiece2Pressed)
         {
             ball.transform.position = PenaltyBallPosition;
+            ballRigidBody.velocity = new Vector3(0, 0, 0);
             transform.position = PenaltyPosition;
             transform.rotation = PenaltyRotation;
             setPiece2Pressed = false;

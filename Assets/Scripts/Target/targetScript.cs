@@ -20,20 +20,17 @@ public class targetScript : MonoBehaviour
             ScoreManager.IncrementScore();
 
             Vector3 oldPos = transform.position;
-            Instantiate(fractured, oldPos, Quaternion.identity);
-            Destroy(gameObject);
-
-            StartCoroutine(DestroyFracturedObjectAfterDelay(fractured, 1));
+            GameObject fracturedInstance = Instantiate(fractured, oldPos, Quaternion.identity);
+            StartCoroutine(DestroyFracturedObjectAfterDelay(fracturedInstance, 1));
+            gameObject.GetComponent<MeshRenderer>().enabled = false;
         }
     }
 
 
     private IEnumerator DestroyFracturedObjectAfterDelay(GameObject obj, float delay)
     {
-        Debug.Log("adfasdf");
         yield return new WaitForSeconds(delay);
-
-
         Destroy(obj);
+        Destroy(gameObject);
     }
 }

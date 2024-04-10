@@ -6,8 +6,10 @@ using UnityEngine;
 public class backCollision : MonoBehaviour
 {
     public ParticleSystem fireworks1;
-
     public ParticleSystem fireworks2;
+    public AudioSource cheering;
+    public AudioSource niceShot;
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -15,19 +17,14 @@ public class backCollision : MonoBehaviour
         fireworks2.GetComponent<ParticleSystem>();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     public void OnCollisionEnter(Collision other)
     {
-        if (other.gameObject.tag == "ball")
+        if (other.gameObject.tag == "Ball")
         {
-            Debug.Log("ballentered");
             fireworks1.Play();
             fireworks2.Play();
+            cheering.Play();
+            niceShot.Play();
         }
     }
 }

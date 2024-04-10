@@ -21,7 +21,7 @@ public class targetScript : MonoBehaviour
 
             Vector3 oldPos = transform.position;
             GameObject fracturedInstance = Instantiate(fractured, oldPos, Quaternion.identity);
-            StartCoroutine(DestroyFracturedObjectAfterDelay(fracturedInstance, 1));
+            StartCoroutine(DestroyFracturedObjectAfterDelay(fracturedInstance, 2));
             gameObject.GetComponent<MeshRenderer>().enabled = false;
         }
     }

@@ -14,6 +14,7 @@ public class PlayerMovement : MonoBehaviour
     public Vector3 FreeKickPosition;
     public Quaternion FreeKickRotation;
     public Vector3 FreeKickBallPosition;
+    public GameObject LaceKickingTimelineController;
 
 
     // Start is called before the first frame update
@@ -147,6 +148,7 @@ public class PlayerMovement : MonoBehaviour
         if(laceKickPressed)
         {
             Debug.Log("Lace Kick Pressed");
+            LaceKickingTimelineController.GetComponent<LaceKickingTimelineScript>().play();
             RightShoe.GetComponent<KickBall>().enableLaceKicking();
             animator.SetBool(isLaceKickingHash, true);
         }

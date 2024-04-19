@@ -33,6 +33,7 @@ public class PlayerMovement : MonoBehaviour
     bool runPressed;
     bool sideKickPressed;
     bool laceKickPressed;
+    bool randomisePressed;
 
     // string to store restart button pressed
     bool restartPressed;
@@ -44,11 +45,19 @@ public class PlayerMovement : MonoBehaviour
     // reference to ball and camera
     public GameObject ball;
     public Rigidbody ballRigidBody;
+
+    // reference to the goal targets
+    public GameObject goal;
     
     // Awake is called when script is being loaded
     private void Awake()
     {
         input = new PlayerInput();
+
+        input.CharacterControls.RandomiseTarget.performed += ctx =>
+        {
+            randomisePressed = ctx.ReadValueAsButton();
+        };
 
         input.CharacterControls.Move.performed += ctx => {
             onMovementInput(ctx);
@@ -89,12 +98,6 @@ public class PlayerMovement : MonoBehaviour
             setPiece2Pressed = ctx.ReadValueAsButton();
         };
     }
-
-    void onMovementInput(InputAction.CallbackContext ctx)
-    {
-        currentMovement = ctx.ReadValue<Vector2>();
-        movementPressed = currentMovement.x != 0 || currentMovement.y != 0;
-    }
     void Start()
     {
         // Get the animator component within the Unity Project
@@ -122,6 +125,22 @@ public class PlayerMovement : MonoBehaviour
         handleShoot();
         handleRestart();
         HandleInitialPosition();
+        handleRandomise();
+    }
+
+    void onMovementInput(InputAction.CallbackContext ctx)
+    {
+        currentMovement = ctx.ReadValue<Vector2>();
+        movementPressed = currentMovement.x != 0 || currentMovement.y != 0;
+    }
+
+    void handleRandomise()
+    {
+        if(randomisePressed)
+        {
+            goal.GetComponent<TargetController>().randomiseTargets();
+            randomisePressed = false;
+        }
     }
 
     void handleRestart()

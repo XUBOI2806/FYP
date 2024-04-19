@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028352, g: 0.22571376, b: 0.3069224, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -20381,7 +20381,7 @@ GameObject:
   - component: {fileID: 713952810}
   m_Layer: 0
   m_Name: Target 1 (1)
-  m_TagString: Untagged
+  m_TagString: Target
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -20623,8 +20623,23 @@ MonoBehaviour:
   FreeKickPosition: {x: 7.392, y: 0.04, z: 10.582}
   FreeKickRotation: {x: 0, y: 0, z: 0, w: 1}
   FreeKickBallPosition: {x: 7.52, y: 0.29, z: 11.99}
+  LaceKickingTimelineController: {fileID: 0}
   ball: {fileID: 1074472946}
   ballRigidBody: {fileID: 1074472948}
+  goal: {fileID: 1302680032}
+--- !u!114 &741140692
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 741140687}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 411d8af803568544b97f9d2fa32d9c7b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  goal: {fileID: 1302680032}
 --- !u!1 &785306560
 GameObject:
   m_ObjectHideFlags: 0
@@ -25712,7 +25727,7 @@ GameObject:
   - component: {fileID: 888824978}
   m_Layer: 0
   m_Name: Target 1
-  m_TagString: Untagged
+  m_TagString: Target
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -26243,7 +26258,15 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 4bcfcd43963b7cc44b7f2a9c390b4390, type: 3}
       insertIndex: -1
       addedObject: {fileID: 741140690}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 4bcfcd43963b7cc44b7f2a9c390b4390, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 741140692}
   m_SourcePrefab: {fileID: 100100000, guid: 4bcfcd43963b7cc44b7f2a9c390b4390, type: 3}
+--- !u!1 &1302680032 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: c0e1044185f507e4cbc92749567af6ae, type: 3}
+  m_PrefabInstance: {fileID: 1723783765}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1326281491 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -8391222552659086748, guid: 9db873478215ebc4e90421ab8b7e16e8, type: 3}
@@ -26281,6 +26304,19 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: c0e1044185f507e4cbc92749567af6ae, type: 3}
   m_PrefabInstance: {fileID: 1723783765}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1512164708
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1302680032}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f82be53447f86c4c9784cca918a61b0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targets: []
 --- !u!1 &1594047229
 GameObject:
   m_ObjectHideFlags: 0
@@ -31616,7 +31652,10 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: c0e1044185f507e4cbc92749567af6ae, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1829999147}
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: c0e1044185f507e4cbc92749567af6ae, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1512164708}
   m_SourcePrefab: {fileID: 100100000, guid: c0e1044185f507e4cbc92749567af6ae, type: 3}
 --- !u!1 &1810874414
 GameObject:
@@ -31795,7 +31834,7 @@ GameObject:
   - component: {fileID: 1829999151}
   m_Layer: 0
   m_Name: Target 1 (3)
-  m_TagString: Untagged
+  m_TagString: Target
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -42148,7 +42187,7 @@ GameObject:
   - component: {fileID: 2106465164}
   m_Layer: 0
   m_Name: Target 1 (2)
-  m_TagString: Untagged
+  m_TagString: Target
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

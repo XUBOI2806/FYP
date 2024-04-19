@@ -15,8 +15,7 @@ public class KickBall : MonoBehaviour
     {
         
     }
-
-    // Update is called once per frame
+    
     void FixedUpdate()
     {
         if(!isLaceKicking && !isSideKicking)
@@ -27,7 +26,7 @@ public class KickBall : MonoBehaviour
         {
             GetComponent<Collider>().enabled = true;
         }
-        velocity = ((transform.position - previous)) / Time.deltaTime;
+        velocity = ((transform.position - previous)) / Time.fixedDeltaTime;
         previous = transform.position;
     }
 
@@ -40,7 +39,7 @@ public class KickBall : MonoBehaviour
             if(isLaceKicking)
             {
                 Debug.Log("Lace Kick");
-                collision.gameObject.GetComponent<Rigidbody>().AddForce(velocity.x * 30, velocity.magnitude * 10, velocity.z * 30);
+                collision.gameObject.GetComponent<Rigidbody>().AddForce(velocity.x * 50, velocity.magnitude * 20, velocity.z * 50);
             }
             if(isSideKicking)
             {

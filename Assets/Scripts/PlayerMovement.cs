@@ -108,8 +108,8 @@ public class PlayerMovement : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
-    {
+    void FixedUpdate()
+    {   
 
         // ad hoc fix to prevent player from sinking
         Vector3 currentPosition = transform.position;

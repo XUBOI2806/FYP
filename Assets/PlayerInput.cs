@@ -116,6 +116,15 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Decrease Target Size"",
+                    ""type"": ""Button"",
+                    ""id"": ""b03bc39f-7774-493c-8b4d-90ddc6decec2"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -411,8 +420,19 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""path"": ""<Keyboard>/t"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""Keyboard&Mouse"",
                     ""action"": ""Randomise Target"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""7d8a0f68-2cd3-4e9d-96b3-b33379025b42"",
+                    ""path"": ""<Keyboard>/j"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Decrease Target Size"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -1010,6 +1030,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         m_CharacterControls_SetPiece1 = m_CharacterControls.FindAction("Set Piece 1", throwIfNotFound: true);
         m_CharacterControls_SetPiece2 = m_CharacterControls.FindAction("Set Piece 2", throwIfNotFound: true);
         m_CharacterControls_RandomiseTarget = m_CharacterControls.FindAction("Randomise Target", throwIfNotFound: true);
+        m_CharacterControls_DecreaseTargetSize = m_CharacterControls.FindAction("Decrease Target Size", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -1093,6 +1114,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
     private readonly InputAction m_CharacterControls_SetPiece1;
     private readonly InputAction m_CharacterControls_SetPiece2;
     private readonly InputAction m_CharacterControls_RandomiseTarget;
+    private readonly InputAction m_CharacterControls_DecreaseTargetSize;
     public struct CharacterControlsActions
     {
         private @PlayerInput m_Wrapper;
@@ -1107,6 +1129,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         public InputAction @SetPiece1 => m_Wrapper.m_CharacterControls_SetPiece1;
         public InputAction @SetPiece2 => m_Wrapper.m_CharacterControls_SetPiece2;
         public InputAction @RandomiseTarget => m_Wrapper.m_CharacterControls_RandomiseTarget;
+        public InputAction @DecreaseTargetSize => m_Wrapper.m_CharacterControls_DecreaseTargetSize;
         public InputActionMap Get() { return m_Wrapper.m_CharacterControls; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -1146,6 +1169,9 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
             @RandomiseTarget.started += instance.OnRandomiseTarget;
             @RandomiseTarget.performed += instance.OnRandomiseTarget;
             @RandomiseTarget.canceled += instance.OnRandomiseTarget;
+            @DecreaseTargetSize.started += instance.OnDecreaseTargetSize;
+            @DecreaseTargetSize.performed += instance.OnDecreaseTargetSize;
+            @DecreaseTargetSize.canceled += instance.OnDecreaseTargetSize;
         }
 
         private void UnregisterCallbacks(ICharacterControlsActions instance)
@@ -1180,6 +1206,9 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
             @RandomiseTarget.started -= instance.OnRandomiseTarget;
             @RandomiseTarget.performed -= instance.OnRandomiseTarget;
             @RandomiseTarget.canceled -= instance.OnRandomiseTarget;
+            @DecreaseTargetSize.started -= instance.OnDecreaseTargetSize;
+            @DecreaseTargetSize.performed -= instance.OnDecreaseTargetSize;
+            @DecreaseTargetSize.canceled -= instance.OnDecreaseTargetSize;
         }
 
         public void RemoveCallbacks(ICharacterControlsActions instance)
@@ -1372,6 +1401,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         void OnSetPiece1(InputAction.CallbackContext context);
         void OnSetPiece2(InputAction.CallbackContext context);
         void OnRandomiseTarget(InputAction.CallbackContext context);
+        void OnDecreaseTargetSize(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {

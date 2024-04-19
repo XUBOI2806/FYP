@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using Unity.VisualScripting.Antlr3.Runtime.Tree;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -33,6 +34,8 @@ public class PlayerMovement : MonoBehaviour
     protected bool sideKickPressed;
     protected bool laceKickPressed;
     protected bool randomisePressed;
+    protected bool targetDecreasePressed;
+    /*protected bool targetIncreasePressed;*/
 
     // string to store restart button pressed
     bool restartPressed;
@@ -46,17 +49,13 @@ public class PlayerMovement : MonoBehaviour
     public Rigidbody ballRigidBody;
 
     // reference to the goal targets
-    public GameObject goal;
+    public TargetController targetController;
     
     // Awake is called when script is being loaded
     private void Awake()
     {
         input = new PlayerInput();
-
-        input.CharacterControls.RandomiseTarget.performed += ctx =>
-        {
-            randomisePressed = ctx.ReadValueAsButton();
-        };
+        
 
         input.CharacterControls.Move.performed += ctx => {
             onMovementInput(ctx);
@@ -81,6 +80,7 @@ public class PlayerMovement : MonoBehaviour
 
         input.CharacterControls.Restart.performed += ctx =>
         {
+            Debug.Log("R pressed");
             restartPressed = ctx.ReadValueAsButton();
         };
 
@@ -95,6 +95,18 @@ public class PlayerMovement : MonoBehaviour
         input.CharacterControls.SetPiece2.performed += ctx =>
         {
             setPiece2Pressed = ctx.ReadValueAsButton();
+        };
+        
+        input.CharacterControls.RandomiseTarget.performed += ctx =>
+        {
+            randomisePressed = ctx.ReadValueAsButton();
+            Debug.Log("T pressed");
+        };
+        
+        input.CharacterControls.DecreaseTargetSize.performed += ctx =>
+        {
+            targetDecreasePressed = ctx.ReadValueAsButton();
+            Debug.Log("J pressed");
         };
     }
     void Start()
@@ -124,6 +136,8 @@ public class PlayerMovement : MonoBehaviour
         handleRestart();
         HandleInitialPosition();
         handleRandomise();
+        handleTargetSizeDecrease();
+        /*handleTargetSizeIncrease();*/
     }
 
     void onMovementInput(InputAction.CallbackContext ctx)
@@ -131,15 +145,7 @@ public class PlayerMovement : MonoBehaviour
         currentMovement = ctx.ReadValue<Vector2>();
         movementPressed = currentMovement.x != 0 || currentMovement.y != 0;
     }
-
-    void handleRandomise()
-    {
-        if(randomisePressed)
-        {
-            goal.GetComponent<TargetController>().randomiseTargets();
-            randomisePressed = false;
-        }
-    }
+    
 
     void handleRestart()
     {
@@ -258,6 +264,43 @@ public class PlayerMovement : MonoBehaviour
         }
 
     }
+    
+    void handleRandomise()
+    {
+        // Do the ranodmising here
+        
+        if (randomisePressed)
+        {
+            targetController.randomiseTargets();
+            randomisePressed = false;
+        }
+
+        
+    }
+    
+    void handleTargetSizeDecrease()
+    {
+        // Do the target decreasing here
+        if (targetDecreasePressed)
+        {
+            
+            targetController.ShrinkTargets();
+            targetDecreasePressed = false;
+        }
+        
+    }
+    /*void handleTargetSizeIncrease()
+    {
+        // Do the target decreasing here
+        if (targetIncreasePressed)
+        {
+            
+            targetController.ExpandTargets();
+            targetIncreasePressed= false;
+        }
+        
+    }*/
+    
 
     private void OnEnable()
     {
@@ -265,6 +308,7 @@ public class PlayerMovement : MonoBehaviour
         input.CharacterControls.Enable();
 
     }
+    
 
     private void OnDisable()
     {

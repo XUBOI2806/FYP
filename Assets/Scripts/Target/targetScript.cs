@@ -9,7 +9,6 @@ public class targetScript : MonoBehaviour
     public ScoreManager ScoreManager;
 
     public GameObject fractured;
-   
 
     private void OnCollisionEnter(Collision collision)
     {
@@ -25,6 +24,8 @@ public class targetScript : MonoBehaviour
             gameObject.GetComponent<MeshRenderer>().enabled = false;
         }
     }
+    
+    
 
 
     private IEnumerator DestroyFracturedObjectAfterDelay(GameObject obj, float delay)

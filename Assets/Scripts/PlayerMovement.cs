@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using Unity.VisualScripting.Antlr3.Runtime.Tree;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -14,26 +15,28 @@ public class PlayerMovement : MonoBehaviour
     public Vector3 FreeKickPosition;
     public Quaternion FreeKickRotation;
     public Vector3 FreeKickBallPosition;
-    public GameObject LaceKickingTimelineController;
 
 
     // Start is called before the first frame update
-    Animator animator;
-    int isWalkingHash;
-    int isRunningHash;
-    int isLaceKickingHash;
-    int isSideKickingHash;
+    protected Animator animator;
+    protected int isWalkingHash;
+    protected int isRunningHash;
+    protected int isLaceKickingHash;
+    protected int isSideKickingHash;
 
     // Init player input
     PlayerInput input;
 
     // variable to store player input
     Vector2 currentMovement;
-    bool movementPressed;
-    bool runPressed;
-    bool sideKickPressed;
-    bool laceKickPressed;
-    bool randomisePressed;
+    protected bool movementPressed;
+    protected bool runPressed;
+    protected bool sideKickPressed;
+    protected bool laceKickPressed;
+    protected bool randomisePressed;
+    protected bool targetDecreasePressed;
+    protected bool moveTargetPressed;
+    /*protected bool targetIncreasePressed;*/
 
     // string to store restart button pressed
     bool restartPressed;
@@ -47,17 +50,13 @@ public class PlayerMovement : MonoBehaviour
     public Rigidbody ballRigidBody;
 
     // reference to the goal targets
-    public GameObject goal;
+    public TargetController targetController;
     
     // Awake is called when script is being loaded
     private void Awake()
     {
         input = new PlayerInput();
-
-        input.CharacterControls.RandomiseTarget.performed += ctx =>
-        {
-            randomisePressed = ctx.ReadValueAsButton();
-        };
+        
 
         input.CharacterControls.Move.performed += ctx => {
             onMovementInput(ctx);
@@ -82,6 +81,7 @@ public class PlayerMovement : MonoBehaviour
 
         input.CharacterControls.Restart.performed += ctx =>
         {
+            Debug.Log("R pressed");
             restartPressed = ctx.ReadValueAsButton();
         };
 
@@ -97,6 +97,25 @@ public class PlayerMovement : MonoBehaviour
         {
             setPiece2Pressed = ctx.ReadValueAsButton();
         };
+
+        // input for altering targets
+
+        input.CharacterControls.MoveTarget.performed += ctx =>
+        {
+            moveTargetPressed = ctx.ReadValueAsButton();
+        };
+        
+        input.CharacterControls.RandomiseTarget.performed += ctx =>
+        {
+            randomisePressed = ctx.ReadValueAsButton();
+            Debug.Log("T pressed");
+        };
+        
+        input.CharacterControls.DecreaseTargetSize.performed += ctx =>
+        {
+            targetDecreasePressed = ctx.ReadValueAsButton();
+            Debug.Log("J pressed");
+        };
     }
     void Start()
     {
@@ -111,9 +130,8 @@ public class PlayerMovement : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
-
         // ad hoc fix to prevent player from sinking
         Vector3 currentPosition = transform.position;
         currentPosition.y = 0;
@@ -126,6 +144,9 @@ public class PlayerMovement : MonoBehaviour
         handleRestart();
         HandleInitialPosition();
         handleRandomise();
+        handleTargetSizeDecrease();
+        handleTargetMovement();
+        /*handleTargetSizeIncrease();*/
     }
 
     void onMovementInput(InputAction.CallbackContext ctx)
@@ -133,15 +154,7 @@ public class PlayerMovement : MonoBehaviour
         currentMovement = ctx.ReadValue<Vector2>();
         movementPressed = currentMovement.x != 0 || currentMovement.y != 0;
     }
-
-    void handleRandomise()
-    {
-        if(randomisePressed)
-        {
-            goal.GetComponent<TargetController>().randomiseTargets();
-            randomisePressed = false;
-        }
-    }
+    
 
     void handleRestart()
     {
@@ -151,7 +164,7 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    void handleShoot()
+    protected virtual void handleShoot()
     {
         if(sideKickPressed)
         {
@@ -167,7 +180,6 @@ public class PlayerMovement : MonoBehaviour
         if(laceKickPressed)
         {
             Debug.Log("Lace Kick Pressed");
-            LaceKickingTimelineController.GetComponent<LaceKickingTimelineScript>().play();
             RightShoe.GetComponent<KickBall>().enableLaceKicking();
             animator.SetBool(isLaceKickingHash, true);
         }
@@ -177,6 +189,7 @@ public class PlayerMovement : MonoBehaviour
             animator.SetBool(isLaceKickingHash, false);
         }
     }
+    
     void handleRotation()
     {
         Vector3 currentPosition = transform.position;
@@ -260,6 +273,52 @@ public class PlayerMovement : MonoBehaviour
         }
 
     }
+    
+    void handleRandomise()
+    {
+        // Do the ranodmising here
+        
+        if (randomisePressed)
+        {
+            targetController.randomiseTargets();
+            randomisePressed = false;
+        }
+
+        
+    }
+
+    void handleTargetMovement()
+    {
+        if (moveTargetPressed)
+        {
+            Debug.Log("moveing target");
+            targetController.moveTarget();
+        }
+    }
+    
+    void handleTargetSizeDecrease()
+    {
+        // Do the target decreasing here
+        if (targetDecreasePressed)
+        {
+            
+            targetController.ShrinkTargets();
+            targetDecreasePressed = false;
+        }
+        
+    }
+    /*void handleTargetSizeIncrease()
+    {
+        // Do the target decreasing here
+        if (targetIncreasePressed)
+        {
+            
+            targetController.ExpandTargets();
+            targetIncreasePressed= false;
+        }
+        
+    }*/
+    
 
     private void OnEnable()
     {
@@ -267,6 +326,7 @@ public class PlayerMovement : MonoBehaviour
         input.CharacterControls.Enable();
 
     }
+    
 
     private void OnDisable()
     {

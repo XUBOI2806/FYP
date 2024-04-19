@@ -15,8 +15,7 @@ public class KickBall : MonoBehaviour
     {
         
     }
-
-    // Update is called once per frame
+    
     void FixedUpdate()
     {
         if(!isLaceKicking && !isSideKicking)
@@ -27,7 +26,7 @@ public class KickBall : MonoBehaviour
         {
             GetComponent<Collider>().enabled = true;
         }
-        velocity = ((transform.position - previous)) / Time.deltaTime;
+        velocity = ((transform.position - previous)) / Time.fixedDeltaTime;
         previous = transform.position;
     }
 

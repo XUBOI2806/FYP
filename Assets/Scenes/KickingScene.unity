@@ -20214,7 +20214,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 8b4520ad5c1430c489d91e4bb94ca4d2, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 7.52
+      value: 7.5
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 8b4520ad5c1430c489d91e4bb94ca4d2, type: 3}
       propertyPath: m_LocalPosition.y
@@ -20222,7 +20222,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 8b4520ad5c1430c489d91e4bb94ca4d2, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 12.121
+      value: 12.338
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 8b4520ad5c1430c489d91e4bb94ca4d2, type: 3}
       propertyPath: m_LocalRotation.w
@@ -20625,6 +20625,7 @@ MonoBehaviour:
   FreeKickBallPosition: {x: 7.52, y: 0.29, z: 11.99}
   ball: {fileID: 1074472946}
   ballRigidBody: {fileID: 1074472948}
+  goal: {fileID: 0}
 --- !u!1 &785306560
 GameObject:
   m_ObjectHideFlags: 0
@@ -31779,7 +31780,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 1
   m_Constraints: 0
-  m_CollisionDetection: 2
+  m_CollisionDetection: 1
 --- !u!1 &1829999146
 GameObject:
   m_ObjectHideFlags: 0

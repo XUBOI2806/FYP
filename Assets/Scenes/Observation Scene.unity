@@ -21039,19 +21039,20 @@ MonoBehaviour:
   m_GameObject: {fileID: 741140687}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4f74b47ea6a3bee429f2f9e0ea43e06a, type: 3}
+  m_Script: {fileID: 11500000, guid: 95de29bd22733e24eb002801131aace8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   RightShoe: {fileID: 1810874414}
   PenaltyPosition: {x: 7.6, y: 0.04, z: 16.52}
-  PenaltyRotation: {x: 0, y: -0.06481098, z: 0, w: 0.99789757}
+  PenaltyRotation: {x: 0, y: 0.064810984, z: 0, w: -0.99789757}
   PenaltyBallPosition: {x: 7.55, y: 0.29, z: 17}
-  FreeKickPosition: {x: 7.392, y: 0.04, z: 10.582}
-  FreeKickRotation: {x: 0, y: 0, z: 0, w: 1}
-  FreeKickBallPosition: {x: 7.52, y: 0.29, z: 11.99}
-  LaceKickingTimelineController: {fileID: 2043543836}
+  FreeKickPosition: {x: 0, y: 0, z: 0}
+  FreeKickRotation: {x: 0, y: 0, z: 0, w: 0}
+  FreeKickBallPosition: {x: 0, y: 0, z: 0}
   ball: {fileID: 1074472946}
   ballRigidBody: {fileID: 1074472948}
+  goal: {fileID: 0}
+  LaceKickingTimelineController: {fileID: 2043543836}
 --- !u!1 &785306560
 GameObject:
   m_ObjectHideFlags: 0

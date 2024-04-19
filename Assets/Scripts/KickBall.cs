@@ -39,7 +39,7 @@ public class KickBall : MonoBehaviour
             if(isLaceKicking)
             {
                 Debug.Log("Lace Kick");
-                collision.gameObject.GetComponent<Rigidbody>().AddForce(velocity.x * 50, velocity.magnitude * 20, velocity.z * 50);
+                collision.gameObject.GetComponent<Rigidbody>().AddForce(velocity.x * 30, velocity.magnitude * 10, velocity.z * 30);
             }
             if(isSideKicking)
             {

@@ -14,26 +14,25 @@ public class PlayerMovement : MonoBehaviour
     public Vector3 FreeKickPosition;
     public Quaternion FreeKickRotation;
     public Vector3 FreeKickBallPosition;
-    public GameObject LaceKickingTimelineController;
 
 
     // Start is called before the first frame update
-    Animator animator;
-    int isWalkingHash;
-    int isRunningHash;
-    int isLaceKickingHash;
-    int isSideKickingHash;
+    protected Animator animator;
+    protected int isWalkingHash;
+    protected int isRunningHash;
+    protected int isLaceKickingHash;
+    protected int isSideKickingHash;
 
     // Init player input
     PlayerInput input;
 
     // variable to store player input
     Vector2 currentMovement;
-    bool movementPressed;
-    bool runPressed;
-    bool sideKickPressed;
-    bool laceKickPressed;
-    bool randomisePressed;
+    protected bool movementPressed;
+    protected bool runPressed;
+    protected bool sideKickPressed;
+    protected bool laceKickPressed;
+    protected bool randomisePressed;
 
     // string to store restart button pressed
     bool restartPressed;
@@ -112,8 +111,7 @@ public class PlayerMovement : MonoBehaviour
 
     // Update is called once per frame
     void FixedUpdate()
-    {   
-
+    {
         // ad hoc fix to prevent player from sinking
         Vector3 currentPosition = transform.position;
         currentPosition.y = 0;
@@ -151,7 +149,7 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    void handleShoot()
+    protected virtual void handleShoot()
     {
         if(sideKickPressed)
         {
@@ -167,7 +165,6 @@ public class PlayerMovement : MonoBehaviour
         if(laceKickPressed)
         {
             Debug.Log("Lace Kick Pressed");
-            LaceKickingTimelineController.GetComponent<LaceKickingTimelineScript>().play();
             RightShoe.GetComponent<KickBall>().enableLaceKicking();
             animator.SetBool(isLaceKickingHash, true);
         }
@@ -177,6 +174,7 @@ public class PlayerMovement : MonoBehaviour
             animator.SetBool(isLaceKickingHash, false);
         }
     }
+    
     void handleRotation()
     {
         Vector3 currentPosition = transform.position;

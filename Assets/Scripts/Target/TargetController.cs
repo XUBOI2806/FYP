@@ -6,6 +6,12 @@ public class TargetController : MonoBehaviour
 {
     public float decreaseSizeFactor = 0.9f;
     public float expandSizeFactor = 1.1f;
+
+    // Define the duration of movement
+    public float duration = 3f;
+
+
+
     public GameObject[] targets;
     // Start is called before the first frame update
     void Start()
@@ -27,6 +33,64 @@ public class TargetController : MonoBehaviour
             target.transform.localPosition = new Vector3(Random.Range(-3.16f, 3.163f), Random.Range(0.484f, 1.955f), 1.117f);
         }
     }
+
+    // move targets from x = 3 to x = -3
+    public void moveTarget()
+    {
+
+
+        // Define the start and end positions
+        Vector3 startPosition;
+        Vector3 endPosition;
+
+        
+
+        // Interpolate the position over time
+        foreach (GameObject target in targets)
+        {
+            if (target != null)
+            {
+                Debug.Log("Initial position of " + target.name + ": " + target.transform.position);
+                switch (target.name)
+                {
+                    case "Bottom Left Target":
+                        startPosition = new Vector3(3.5f, 0.5f, 27f);
+                        endPosition = new Vector3(6f, 0.5f, 27f);
+                        break;
+                    case "Top Left Target":
+                        startPosition = new Vector3(3.5f, 2.5f, 27f);
+                        endPosition = new Vector3(6f, 2.5f, 27f);
+                        break;
+                    case "Bottom Right Target":
+                        startPosition = new Vector3(11.5f, 0.5f, 27f);
+                        endPosition = new Vector3(8f, 0.5f, 27f);
+                        break;
+                    case "Top Right Target":
+                        startPosition = new Vector3(11.5f, 2.5f, 27f);
+                        endPosition = new Vector3(8f, 2.5f, 27f);
+                        break;
+                    default:
+                        startPosition = new Vector3(4f, 4f, 27f);
+                        endPosition = new Vector3(6f, 4f, 27f);
+                        break;
+                }
+
+                // Calculate the current position based on time
+
+                float timeFraction = Mathf.PingPong(Time.time, duration) / duration;
+                Vector3 newPosition = Vector3.Lerp(startPosition, endPosition, timeFraction);
+
+                // Update the target's position
+                target.transform.position = newPosition;
+
+
+            }
+
+        }
+    }
+
+
+
     public void ShrinkTargets()
     {
         foreach (GameObject target in targets)

@@ -35,6 +35,7 @@ public class PlayerMovement : MonoBehaviour
     protected bool laceKickPressed;
     protected bool randomisePressed;
     protected bool targetDecreasePressed;
+    protected bool moveTargetPressed;
     /*protected bool targetIncreasePressed;*/
 
     // string to store restart button pressed
@@ -96,6 +97,13 @@ public class PlayerMovement : MonoBehaviour
         {
             setPiece2Pressed = ctx.ReadValueAsButton();
         };
+
+        // input for altering targets
+
+        input.CharacterControls.MoveTarget.performed += ctx =>
+        {
+            moveTargetPressed = ctx.ReadValueAsButton();
+        };
         
         input.CharacterControls.RandomiseTarget.performed += ctx =>
         {
@@ -137,6 +145,7 @@ public class PlayerMovement : MonoBehaviour
         HandleInitialPosition();
         handleRandomise();
         handleTargetSizeDecrease();
+        handleTargetMovement();
         /*handleTargetSizeIncrease();*/
     }
 
@@ -276,6 +285,15 @@ public class PlayerMovement : MonoBehaviour
         }
 
         
+    }
+
+    void handleTargetMovement()
+    {
+        if (moveTargetPressed)
+        {
+            Debug.Log("moveing target");
+            targetController.moveTarget();
+        }
     }
     
     void handleTargetSizeDecrease()

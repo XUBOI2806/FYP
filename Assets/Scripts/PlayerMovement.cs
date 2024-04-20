@@ -81,7 +81,6 @@ public class PlayerMovement : MonoBehaviour
 
         input.CharacterControls.Restart.performed += ctx =>
         {
-            Debug.Log("R pressed");
             restartPressed = ctx.ReadValueAsButton();
         };
 
@@ -108,13 +107,11 @@ public class PlayerMovement : MonoBehaviour
         input.CharacterControls.RandomiseTarget.performed += ctx =>
         {
             randomisePressed = ctx.ReadValueAsButton();
-            Debug.Log("T pressed");
         };
         
         input.CharacterControls.DecreaseTargetSize.performed += ctx =>
         {
             targetDecreasePressed = ctx.ReadValueAsButton();
-            Debug.Log("J pressed");
         };
     }
     void Start()

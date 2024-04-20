@@ -54,20 +54,20 @@ public class TargetController : MonoBehaviour
                 switch (target.name)
                 {
                     case "Bottom Left Target":
-                        startPosition = new Vector3(3.5f, 0.5f, 27f);
-                        endPosition = new Vector3(6f, 0.5f, 27f);
+                        startPosition = new Vector3(3.163f, 0.5f, 1.17f);
+                        endPosition = new Vector3(-3.163f, 0.5f, 1.7f);
                         break;
                     case "Top Left Target":
-                        startPosition = new Vector3(3.5f, 2.5f, 27f);
-                        endPosition = new Vector3(6f, 2.5f, 27f);
+                        startPosition = new Vector3(3.163f, 1.955f, 1.17f);
+                        endPosition = new Vector3(-3.163f, 1.955f, 1.17f);
                         break;
                     case "Bottom Right Target":
-                        startPosition = new Vector3(11.5f, 0.5f, 27f);
-                        endPosition = new Vector3(8f, 0.5f, 27f);
+                        startPosition = new Vector3(-3.163f, 0.5f, 1.17f);
+                        endPosition = new Vector3(3.163f, 0.5f, 1.17f);
                         break;
                     case "Top Right Target":
-                        startPosition = new Vector3(11.5f, 2.5f, 27f);
-                        endPosition = new Vector3(8f, 2.5f, 27f);
+                        startPosition = new Vector3(-3.163f, 1.955f, 1.17f);
+                        endPosition = new Vector3(3.163f, 1.955f, 1.17f);
                         break;
                     default:
                         startPosition = new Vector3(4f, 4f, 27f);
@@ -81,7 +81,7 @@ public class TargetController : MonoBehaviour
                 Vector3 newPosition = Vector3.Lerp(startPosition, endPosition, timeFraction);
 
                 // Update the target's position
-                target.transform.position = newPosition;
+                target.transform.localPosition = newPosition;
 
 
             }

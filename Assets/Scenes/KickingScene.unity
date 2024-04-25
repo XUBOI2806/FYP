@@ -26343,12 +26343,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   decreaseSizeFactor: 0.9
   expandSizeFactor: 1.1
-  duration: 3
+  speed: 50
   targets:
   - {fileID: 888824972}
   - {fileID: 713952804}
   - {fileID: 2106465159}
   - {fileID: 1829999146}
+  endPosition: []
+  setupEndPositionBool: 0
+  startPosition: []
+  setupStartPositionBool: 0
+  moveToEnd: 
+  setupBool: 0
 --- !u!4 &1428444261
 Transform:
   m_ObjectHideFlags: 0
@@ -26388,8 +26394,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   decreaseSizeFactor: 0.9
   expandSizeFactor: 1.1
-  duration: 3
+  speed: 1
   targets: []
+  endPosition: []
+  setupEndPositionBool: 0
+  startPosition: []
+  setupStartPositionBool: 0
+  moveToEnd: 
+  setupBool: 0
 --- !u!1 &1594047229
 GameObject:
   m_ObjectHideFlags: 0

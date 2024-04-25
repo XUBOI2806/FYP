@@ -134,6 +134,24 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Increase Target Movement"",
+                    ""type"": ""Button"",
+                    ""id"": ""a36e8ba9-d9ed-4fe1-bd70-7640d3974c56"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Decrease Target Movement"",
+                    ""type"": ""Button"",
+                    ""id"": ""782fd489-9d91-4589-96b4-55c285db1e92"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -453,6 +471,28 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""MoveTarget"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""227bfdaa-dc2b-4fff-827a-81b5d031315b"",
+                    ""path"": ""<Keyboard>/equals"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Increase Target Movement"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""59e809e9-5857-4a48-86c1-5f783ce41601"",
+                    ""path"": ""<Keyboard>/minus"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Decrease Target Movement"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -1052,6 +1092,8 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         m_CharacterControls_RandomiseTarget = m_CharacterControls.FindAction("Randomise Target", throwIfNotFound: true);
         m_CharacterControls_DecreaseTargetSize = m_CharacterControls.FindAction("Decrease Target Size", throwIfNotFound: true);
         m_CharacterControls_MoveTarget = m_CharacterControls.FindAction("MoveTarget", throwIfNotFound: true);
+        m_CharacterControls_IncreaseTargetMovement = m_CharacterControls.FindAction("Increase Target Movement", throwIfNotFound: true);
+        m_CharacterControls_DecreaseTargetMovement = m_CharacterControls.FindAction("Decrease Target Movement", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -1137,6 +1179,8 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
     private readonly InputAction m_CharacterControls_RandomiseTarget;
     private readonly InputAction m_CharacterControls_DecreaseTargetSize;
     private readonly InputAction m_CharacterControls_MoveTarget;
+    private readonly InputAction m_CharacterControls_IncreaseTargetMovement;
+    private readonly InputAction m_CharacterControls_DecreaseTargetMovement;
     public struct CharacterControlsActions
     {
         private @PlayerInput m_Wrapper;
@@ -1153,6 +1197,8 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         public InputAction @RandomiseTarget => m_Wrapper.m_CharacterControls_RandomiseTarget;
         public InputAction @DecreaseTargetSize => m_Wrapper.m_CharacterControls_DecreaseTargetSize;
         public InputAction @MoveTarget => m_Wrapper.m_CharacterControls_MoveTarget;
+        public InputAction @IncreaseTargetMovement => m_Wrapper.m_CharacterControls_IncreaseTargetMovement;
+        public InputAction @DecreaseTargetMovement => m_Wrapper.m_CharacterControls_DecreaseTargetMovement;
         public InputActionMap Get() { return m_Wrapper.m_CharacterControls; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -1198,6 +1244,12 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
             @MoveTarget.started += instance.OnMoveTarget;
             @MoveTarget.performed += instance.OnMoveTarget;
             @MoveTarget.canceled += instance.OnMoveTarget;
+            @IncreaseTargetMovement.started += instance.OnIncreaseTargetMovement;
+            @IncreaseTargetMovement.performed += instance.OnIncreaseTargetMovement;
+            @IncreaseTargetMovement.canceled += instance.OnIncreaseTargetMovement;
+            @DecreaseTargetMovement.started += instance.OnDecreaseTargetMovement;
+            @DecreaseTargetMovement.performed += instance.OnDecreaseTargetMovement;
+            @DecreaseTargetMovement.canceled += instance.OnDecreaseTargetMovement;
         }
 
         private void UnregisterCallbacks(ICharacterControlsActions instance)
@@ -1238,6 +1290,12 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
             @MoveTarget.started -= instance.OnMoveTarget;
             @MoveTarget.performed -= instance.OnMoveTarget;
             @MoveTarget.canceled -= instance.OnMoveTarget;
+            @IncreaseTargetMovement.started -= instance.OnIncreaseTargetMovement;
+            @IncreaseTargetMovement.performed -= instance.OnIncreaseTargetMovement;
+            @IncreaseTargetMovement.canceled -= instance.OnIncreaseTargetMovement;
+            @DecreaseTargetMovement.started -= instance.OnDecreaseTargetMovement;
+            @DecreaseTargetMovement.performed -= instance.OnDecreaseTargetMovement;
+            @DecreaseTargetMovement.canceled -= instance.OnDecreaseTargetMovement;
         }
 
         public void RemoveCallbacks(ICharacterControlsActions instance)
@@ -1432,6 +1490,8 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         void OnRandomiseTarget(InputAction.CallbackContext context);
         void OnDecreaseTargetSize(InputAction.CallbackContext context);
         void OnMoveTarget(InputAction.CallbackContext context);
+        void OnIncreaseTargetMovement(InputAction.CallbackContext context);
+        void OnDecreaseTargetMovement(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {

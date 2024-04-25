@@ -112,6 +112,24 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "Increase Target Movement",
+                    "type": "Button",
+                    "id": "a36e8ba9-d9ed-4fe1-bd70-7640d3974c56",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Decrease Target Movement",
+                    "type": "Button",
+                    "id": "782fd489-9d91-4589-96b4-55c285db1e92",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -431,6 +449,28 @@
                     "processors": "",
                     "groups": "",
                     "action": "MoveTarget",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "227bfdaa-dc2b-4fff-827a-81b5d031315b",
+                    "path": "<Keyboard>/equals",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Increase Target Movement",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "59e809e9-5857-4a48-86c1-5f783ce41601",
+                    "path": "<Keyboard>/minus",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Decrease Target Movement",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

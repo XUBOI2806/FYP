@@ -37,6 +37,8 @@ public class PlayerMovement : MonoBehaviour
     protected bool targetDecreasePressed;
     protected bool moveTargetPressed;
     /*protected bool targetIncreasePressed;*/
+    protected bool targetSpeedIncreasePressed;
+    protected bool targetSpeedDecreasePressed;
 
     // string to store restart button pressed
     bool restartPressed;
@@ -56,7 +58,16 @@ public class PlayerMovement : MonoBehaviour
     private void Awake()
     {
         input = new PlayerInput();
-        
+
+        input.CharacterControls.IncreaseTargetMovement.performed += ctx =>
+        {
+            targetSpeedIncreasePressed = ctx.ReadValueAsButton();
+        };
+
+        input.CharacterControls.DecreaseTargetMovement.performed += ctx =>
+        {
+            targetSpeedDecreasePressed = ctx.ReadValueAsButton();
+        };
 
         input.CharacterControls.Move.performed += ctx => {
             onMovementInput(ctx);
@@ -144,6 +155,8 @@ public class PlayerMovement : MonoBehaviour
         handleTargetSizeDecrease();
         handleTargetMovement();
         /*handleTargetSizeIncrease();*/
+
+        handleTargetSpeed();
     }
 
     void onMovementInput(InputAction.CallbackContext ctx)
@@ -280,15 +293,27 @@ public class PlayerMovement : MonoBehaviour
             targetController.randomiseTargets();
             randomisePressed = false;
         }
+    }
 
-        
+    void handleTargetSpeed()
+    {
+        if (targetSpeedIncreasePressed)
+        {
+            targetController.increaseTargetMovementSpeed();
+            targetSpeedIncreasePressed = false;
+        }
+
+        if (targetSpeedDecreasePressed)
+        {
+            targetController.decreaseTargetMovementSpeed(); 
+            targetSpeedDecreasePressed = false;
+        }
     }
 
     void handleTargetMovement()
     {
         if (moveTargetPressed)
         {
-            Debug.Log("moveing target");
             targetController.moveTarget();
         }
     }

@@ -7,22 +7,31 @@ public class TargetController : MonoBehaviour
     public float decreaseSizeFactor = 0.9f;
     public float expandSizeFactor = 1.1f;
 
-    // Define the duration of movement
-    public float duration = 3f;
-
-
-
+    private float speed = 1f;
     public GameObject[] targets;
+    public Vector3[] endPosition;
+    public bool setupEndPositionBool;
+    public Vector3[] startPosition;
+    public bool setupStartPositionBool;
+    public bool[] moveToEnd;
+    public bool setupBool;
+
+
+
     // Start is called before the first frame update
     void Start()
     {
-
+        setupEndPositionBool = true;
+        setupStartPositionBool = true;
+        setupBool = true;
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        setupStartPosition();
+        setupEndPosition();
+        setupMoveBoolArray();
     }
 
     // randomise function for all targets
@@ -32,60 +41,125 @@ public class TargetController : MonoBehaviour
         {
             target.transform.localPosition = new Vector3(Random.Range(-3.16f, 3.163f), Random.Range(0.484f, 1.955f), 1.117f);
         }
+        setupStartPositionBool = true;
+    }
+
+    private int getTargetIndex(string targetName)
+    {
+        /**
+         * function to get index number for target given its name
+         */
+        switch (targetName)
+        {
+            case "Bottom Left Target":
+                return 0;
+            case "Top Left Target":
+                return 1;
+            case "Bottom Right Target":
+                return 2;
+            case "Top Right Target":
+                return 3;
+            default:
+                return -1;
+        }
+    }
+
+    public void setupEndPosition()
+    {
+        /**
+         * Method used to set random end positions for each target
+         */
+        if (setupEndPositionBool)
+        {
+            endPosition = new Vector3[targets.Length];
+            foreach (GameObject target in targets)
+            {
+                int i = getTargetIndex(target.name);
+                if (i != -1)
+                {
+                    endPosition[i] = new Vector3(Random.Range(-3.16f, 3.163f), Random.Range(0.484f, 1.955f), 1.117f);
+                }
+            }
+            setupEndPositionBool = false;
+        }
+    }
+
+    public void setupMoveBoolArray()
+    {
+        /**
+         * Method to set bool array to all true
+         */
+        if (setupBool)
+        {
+            moveToEnd = new bool[targets.Length];
+            for (int i = 0; i < moveToEnd.Length; i++)
+            {
+                moveToEnd[i] = true;
+            }
+        }
+        setupBool = false;
+    }
+
+    public void setupStartPosition()
+    {
+        /**
+         * Method to initialise start position
+         */
+        if (setupStartPositionBool)
+        {
+            startPosition = new Vector3[targets.Length];
+            foreach(GameObject target in targets)
+            {
+                int i = getTargetIndex(target.name);
+                if(i != -1)
+                {
+                    startPosition[i] = target.transform.localPosition;
+                }
+            }
+            setupStartPositionBool = false;
+        }
     }
 
     // move targets from x = 3 to x = -3
     public void moveTarget()
     {
-
-
-        // Define the start and end positions
-        Vector3 startPosition;
-        Vector3 endPosition;
-
-        
-
-        // Interpolate the position over time
+        /**
+         * Method to handle target movement
+         */
         foreach (GameObject target in targets)
         {
             if (target != null)
             {
-                Debug.Log("Initial position of " + target.name + ": " + target.transform.position);
-                switch (target.name)
+                int i = getTargetIndex(target.name);
+                Vector3 destination = moveToEnd[i] ? endPosition[i] : startPosition[i];
+
+                // Calculate the direction to the current waypoint
+                Vector3 direction = destination - target.transform.localPosition;
+                direction.Normalize();
+
+                // move the object towards the current waypoint
+                target.transform.localPosition += direction * speed * Time.deltaTime;
+
+                float distance  = Vector3.Distance(target.transform.localPosition, destination);
+                if (distance < 0.1f) 
                 {
-                    case "Bottom Left Target":
-                        startPosition = new Vector3(3.163f, 0.5f, 1.17f);
-                        endPosition = new Vector3(-3.163f, 0.5f, 1.7f);
-                        break;
-                    case "Top Left Target":
-                        startPosition = new Vector3(3.163f, 1.955f, 1.17f);
-                        endPosition = new Vector3(-3.163f, 1.955f, 1.17f);
-                        break;
-                    case "Bottom Right Target":
-                        startPosition = new Vector3(-3.163f, 0.5f, 1.17f);
-                        endPosition = new Vector3(3.163f, 0.5f, 1.17f);
-                        break;
-                    case "Top Right Target":
-                        startPosition = new Vector3(-3.163f, 1.955f, 1.17f);
-                        endPosition = new Vector3(3.163f, 1.955f, 1.17f);
-                        break;
-                    default:
-                        startPosition = new Vector3(4f, 4f, 27f);
-                        endPosition = new Vector3(6f, 4f, 27f);
-                        break;
+                    moveToEnd[i] = !moveToEnd[i];
                 }
-
-                // Calculate the current position based on time
-
-                float timeFraction = Mathf.PingPong(Time.time, duration) / duration;
-                Vector3 newPosition = Vector3.Lerp(startPosition, endPosition, timeFraction);
-
-                // Update the target's position
-                target.transform.localPosition = newPosition;
-
-
             }
+        }
+    }
 
+    public void increaseTargetMovementSpeed()
+    {
+        speed += 1;
+    }
+
+    public void decreaseTargetMovementSpeed()
+    {
+       
+        if (speed > 0)
+        {
+            speed -= 1;
         }
     }
 

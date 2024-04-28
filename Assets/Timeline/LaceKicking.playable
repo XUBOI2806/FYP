@@ -120,7 +120,7 @@ MonoBehaviour:
     m_PreExtrapolationMode: 0
     m_PostExtrapolationTime: 0
     m_PreExtrapolationTime: 0
-    m_DisplayName: Close Side Camera
+    m_DisplayName: Main Virtual Camera
   - m_Version: 1
     m_Start: 0.8333333333333334
     m_ClipIn: 0

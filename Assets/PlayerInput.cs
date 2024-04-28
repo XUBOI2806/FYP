@@ -170,6 +170,15 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""SlowGame"",
+                    ""type"": ""Button"",
+                    ""id"": ""c13cd4d2-5dc1-4478-afc9-d2bda301cfee"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -533,6 +542,17 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Zoom out"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""084b494a-0241-45b5-a810-e63236d90733"",
+                    ""path"": ""<Keyboard>/o"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SlowGame"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -1136,6 +1156,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         m_CharacterControls_DecreaseTargetMovement = m_CharacterControls.FindAction("Decrease Target Movement", throwIfNotFound: true);
         m_CharacterControls_Zoomin = m_CharacterControls.FindAction("Zoom in", throwIfNotFound: true);
         m_CharacterControls_Zoomout = m_CharacterControls.FindAction("Zoom out", throwIfNotFound: true);
+        m_CharacterControls_SlowGame = m_CharacterControls.FindAction("SlowGame", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -1225,6 +1246,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
     private readonly InputAction m_CharacterControls_DecreaseTargetMovement;
     private readonly InputAction m_CharacterControls_Zoomin;
     private readonly InputAction m_CharacterControls_Zoomout;
+    private readonly InputAction m_CharacterControls_SlowGame;
     public struct CharacterControlsActions
     {
         private @PlayerInput m_Wrapper;
@@ -1245,6 +1267,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         public InputAction @DecreaseTargetMovement => m_Wrapper.m_CharacterControls_DecreaseTargetMovement;
         public InputAction @Zoomin => m_Wrapper.m_CharacterControls_Zoomin;
         public InputAction @Zoomout => m_Wrapper.m_CharacterControls_Zoomout;
+        public InputAction @SlowGame => m_Wrapper.m_CharacterControls_SlowGame;
         public InputActionMap Get() { return m_Wrapper.m_CharacterControls; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -1302,6 +1325,9 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
             @Zoomout.started += instance.OnZoomout;
             @Zoomout.performed += instance.OnZoomout;
             @Zoomout.canceled += instance.OnZoomout;
+            @SlowGame.started += instance.OnSlowGame;
+            @SlowGame.performed += instance.OnSlowGame;
+            @SlowGame.canceled += instance.OnSlowGame;
         }
 
         private void UnregisterCallbacks(ICharacterControlsActions instance)
@@ -1354,6 +1380,9 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
             @Zoomout.started -= instance.OnZoomout;
             @Zoomout.performed -= instance.OnZoomout;
             @Zoomout.canceled -= instance.OnZoomout;
+            @SlowGame.started -= instance.OnSlowGame;
+            @SlowGame.performed -= instance.OnSlowGame;
+            @SlowGame.canceled -= instance.OnSlowGame;
         }
 
         public void RemoveCallbacks(ICharacterControlsActions instance)
@@ -1552,6 +1581,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         void OnDecreaseTargetMovement(InputAction.CallbackContext context);
         void OnZoomin(InputAction.CallbackContext context);
         void OnZoomout(InputAction.CallbackContext context);
+        void OnSlowGame(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {

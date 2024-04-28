@@ -15,7 +15,7 @@ public class PlayerMovement : MonoBehaviour
     public Vector3 FreeKickPosition;
     public Quaternion FreeKickRotation;
     public Vector3 FreeKickBallPosition;
-
+    
 
     // Start is called before the first frame update
     protected Animator animator;
@@ -42,6 +42,9 @@ public class PlayerMovement : MonoBehaviour
 
     protected bool zoomInPressed;
     protected bool zoomOutPressed;
+    protected bool slowGamePressed;
+    private float slowdownFactor = 0.75f;
+    private float currentTimeScale = 1;
 
     // string to store restart button pressed
     bool restartPressed;
@@ -139,6 +142,11 @@ public class PlayerMovement : MonoBehaviour
         {
             zoomOutPressed = ctx.ReadValueAsButton();
         };
+        
+        input.CharacterControls.SlowGame.performed += ctx =>
+        {
+            slowGamePressed = ctx.ReadValueAsButton();
+        };
     }
     void Start()
     {
@@ -173,6 +181,9 @@ public class PlayerMovement : MonoBehaviour
 
         handleTargetSpeed();
         handleZoom();
+        handleSlowGame();
+        
+
     }
 
     void onMovementInput(InputAction.CallbackContext ctx)
@@ -187,6 +198,8 @@ public class PlayerMovement : MonoBehaviour
         if (restartPressed)
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            resetTimeScale();
+            
         }
     }
 
@@ -389,4 +402,32 @@ public class PlayerMovement : MonoBehaviour
             zoomOutPressed = false;
         }
     }
+
+    private void setTimeScale()
+    {
+        currentTimeScale = slowdownFactor * currentTimeScale;
+        Debug.Log(slowdownFactor);
+        Time.timeScale = currentTimeScale;
+        Debug.Log(currentTimeScale);
+        Time.fixedDeltaTime = currentTimeScale * 0.02f;
+    }
+
+    private void resetTimeScale()
+    {
+        Time.timeScale = 1;
+        Time.fixedDeltaTime = Time.timeScale * 0.02f;
+    }
+    
+    void handleSlowGame()
+    {
+        if (slowGamePressed)
+        {
+            Debug.Log("slow Game");
+
+            setTimeScale();
+            slowGamePressed = false;
+        }
+    }
 }
+
+

@@ -5467,13 +5467,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 255426202}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0.9347653, z: -0, w: 0.35526595}
+  m_LocalRotation: {x: -0, y: -0.96926504, z: -0, w: 0.24601886}
   m_LocalPosition: {x: 0.42397022, y: 0.02700001, z: 1.3500004}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1905365670}
-  m_LocalEulerAnglesHint: {x: -1.064, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -141.298, z: 0}
 --- !u!114 &255426207
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5535,14 +5535,14 @@ RectTransform:
   m_GameObject: {fileID: 259246877}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 3.5, y: 3.5, z: 3.5}
+  m_LocalScale: {x: 3, y: 3, z: 3}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1329806047}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -191, y: -190}
+  m_AnchoredPosition: {x: -159.9, y: -160}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &259246879
@@ -20893,7 +20893,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 573864521}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0.9347653, z: -0, w: 0.35526595}
+  m_LocalRotation: {x: -0, y: -0.96926504, z: -0, w: 0.24601886}
   m_LocalPosition: {x: 0.42397022, y: 0.02700001, z: 1.3500004}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -21313,7 +21313,7 @@ MonoBehaviour:
   ball: {fileID: 1074472946}
   ballRigidBody: {fileID: 1074472948}
   targetController: {fileID: 0}
-  mainCamera: {fileID: 1600932991}
+  mainCamera: {fileID: 0}
   LaceKickingTimelineController: {fileID: 2043543836}
 --- !u!4 &741140692 stripped
 Transform:
@@ -27310,7 +27310,7 @@ Canvas:
   m_Enabled: 1
   serializedVersion: 3
   m_RenderMode: 0
-  m_Camera: {fileID: 0}
+  m_Camera: {fileID: 1600932991}
   m_PlaneDistance: 100
   m_PixelPerfect: 0
   m_ReceivesEvents: 1
@@ -33542,7 +33542,7 @@ Camera:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1905365669}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_ClearFlags: 1
   m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
@@ -43780,7 +43780,7 @@ GameObject:
   - component: {fileID: 2090978947}
   - component: {fileID: 2090978948}
   m_Layer: 0
-  m_Name: Main Camera
+  m_Name: Main Virtual Camera
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -43794,14 +43794,14 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2090978945}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0.9347653, z: -0, w: 0.35526595}
-  m_LocalPosition: {x: 0.42397022, y: 0.027, z: 1.3500004}
+  m_LocalRotation: {x: -0, y: -0.96926504, z: -0, w: 0.24601886}
+  m_LocalPosition: {x: 0.42397022, y: 0.02700001, z: 1.3500004}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1504265483}
   m_Father: {fileID: 1905365670}
-  m_LocalEulerAnglesHint: {x: 0, y: -138.38, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -151.516, z: 0}
 --- !u!114 &2090978947
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -43854,7 +43854,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 741140692}
-  offset: {x: 1.95, y: 0.9, z: 2.3}
+  offset: {x: 1.08, y: 0.9, z: 1.98}
 --- !u!1 &2092378888
 GameObject:
   m_ObjectHideFlags: 0

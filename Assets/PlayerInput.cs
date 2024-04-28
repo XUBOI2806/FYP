@@ -152,6 +152,24 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Zoom in"",
+                    ""type"": ""Button"",
+                    ""id"": ""62c012d0-a272-45ad-a245-25359aa8dab1"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Zoom out"",
+                    ""type"": ""Button"",
+                    ""id"": ""53333d37-2b0d-4c6b-8df7-bed0c9a6916c"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -493,6 +511,28 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Decrease Target Movement"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""fbb3dd1e-9f88-43ae-b8c3-4d8c6441158a"",
+                    ""path"": ""<Keyboard>/comma"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Zoom in"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""5417c5c5-2f43-4f42-bc7e-6a431ee0b8d3"",
+                    ""path"": ""<Keyboard>/period"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Zoom out"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -1094,6 +1134,8 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         m_CharacterControls_MoveTarget = m_CharacterControls.FindAction("MoveTarget", throwIfNotFound: true);
         m_CharacterControls_IncreaseTargetMovement = m_CharacterControls.FindAction("Increase Target Movement", throwIfNotFound: true);
         m_CharacterControls_DecreaseTargetMovement = m_CharacterControls.FindAction("Decrease Target Movement", throwIfNotFound: true);
+        m_CharacterControls_Zoomin = m_CharacterControls.FindAction("Zoom in", throwIfNotFound: true);
+        m_CharacterControls_Zoomout = m_CharacterControls.FindAction("Zoom out", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -1181,6 +1223,8 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
     private readonly InputAction m_CharacterControls_MoveTarget;
     private readonly InputAction m_CharacterControls_IncreaseTargetMovement;
     private readonly InputAction m_CharacterControls_DecreaseTargetMovement;
+    private readonly InputAction m_CharacterControls_Zoomin;
+    private readonly InputAction m_CharacterControls_Zoomout;
     public struct CharacterControlsActions
     {
         private @PlayerInput m_Wrapper;
@@ -1199,6 +1243,8 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         public InputAction @MoveTarget => m_Wrapper.m_CharacterControls_MoveTarget;
         public InputAction @IncreaseTargetMovement => m_Wrapper.m_CharacterControls_IncreaseTargetMovement;
         public InputAction @DecreaseTargetMovement => m_Wrapper.m_CharacterControls_DecreaseTargetMovement;
+        public InputAction @Zoomin => m_Wrapper.m_CharacterControls_Zoomin;
+        public InputAction @Zoomout => m_Wrapper.m_CharacterControls_Zoomout;
         public InputActionMap Get() { return m_Wrapper.m_CharacterControls; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -1250,6 +1296,12 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
             @DecreaseTargetMovement.started += instance.OnDecreaseTargetMovement;
             @DecreaseTargetMovement.performed += instance.OnDecreaseTargetMovement;
             @DecreaseTargetMovement.canceled += instance.OnDecreaseTargetMovement;
+            @Zoomin.started += instance.OnZoomin;
+            @Zoomin.performed += instance.OnZoomin;
+            @Zoomin.canceled += instance.OnZoomin;
+            @Zoomout.started += instance.OnZoomout;
+            @Zoomout.performed += instance.OnZoomout;
+            @Zoomout.canceled += instance.OnZoomout;
         }
 
         private void UnregisterCallbacks(ICharacterControlsActions instance)
@@ -1296,6 +1348,12 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
             @DecreaseTargetMovement.started -= instance.OnDecreaseTargetMovement;
             @DecreaseTargetMovement.performed -= instance.OnDecreaseTargetMovement;
             @DecreaseTargetMovement.canceled -= instance.OnDecreaseTargetMovement;
+            @Zoomin.started -= instance.OnZoomin;
+            @Zoomin.performed -= instance.OnZoomin;
+            @Zoomin.canceled -= instance.OnZoomin;
+            @Zoomout.started -= instance.OnZoomout;
+            @Zoomout.performed -= instance.OnZoomout;
+            @Zoomout.canceled -= instance.OnZoomout;
         }
 
         public void RemoveCallbacks(ICharacterControlsActions instance)
@@ -1492,6 +1550,8 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         void OnMoveTarget(InputAction.CallbackContext context);
         void OnIncreaseTargetMovement(InputAction.CallbackContext context);
         void OnDecreaseTargetMovement(InputAction.CallbackContext context);
+        void OnZoomin(InputAction.CallbackContext context);
+        void OnZoomout(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {

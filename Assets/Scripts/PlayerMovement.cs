@@ -40,6 +40,9 @@ public class PlayerMovement : MonoBehaviour
     protected bool targetSpeedIncreasePressed;
     protected bool targetSpeedDecreasePressed;
 
+    protected bool zoomInPressed;
+    protected bool zoomOutPressed;
+
     // string to store restart button pressed
     bool restartPressed;
 
@@ -53,6 +56,9 @@ public class PlayerMovement : MonoBehaviour
 
     // reference to the goal targets
     public TargetController targetController;
+
+    // reference to main camera
+    public Camera mainCamera;
     
     // Awake is called when script is being loaded
     private void Awake()
@@ -124,6 +130,15 @@ public class PlayerMovement : MonoBehaviour
         {
             targetDecreasePressed = ctx.ReadValueAsButton();
         };
+
+        input.CharacterControls.Zoomin.performed += ctx =>
+        {
+            zoomInPressed = ctx.ReadValueAsButton();
+        };
+        input.CharacterControls.Zoomout.performed += ctx =>
+        {
+            zoomOutPressed = ctx.ReadValueAsButton();
+        };
     }
     void Start()
     {
@@ -157,6 +172,7 @@ public class PlayerMovement : MonoBehaviour
         /*handleTargetSizeIncrease();*/
 
         handleTargetSpeed();
+        handleZoom();
     }
 
     void onMovementInput(InputAction.CallbackContext ctx)
@@ -310,6 +326,7 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
+
     void handleTargetMovement()
     {
         if (moveTargetPressed)
@@ -340,7 +357,6 @@ public class PlayerMovement : MonoBehaviour
         }
         
     }*/
-    
 
     private void OnEnable()
     {
@@ -354,5 +370,23 @@ public class PlayerMovement : MonoBehaviour
     {
         // enable character action map
         input.CharacterControls.Disable();
+    }
+
+    void handleZoom()
+    {
+        if (zoomInPressed)
+        {
+            Debug.Log("Zoom in");
+
+            mainCamera.fieldOfView = 40;
+            zoomInPressed = false;
+        }
+
+        if (zoomOutPressed)
+        {
+            Debug.Log("Zoom Out");
+            mainCamera.fieldOfView = 80;
+            zoomOutPressed = false;
+        }
     }
 }

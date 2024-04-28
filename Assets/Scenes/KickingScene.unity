@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028352, g: 0.22571376, b: 0.3069224, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -20661,6 +20661,7 @@ MonoBehaviour:
   ball: {fileID: 1074472946}
   ballRigidBody: {fileID: 1074472948}
   targetController: {fileID: 1428444260}
+  mainCamera: {fileID: 255426204}
 --- !u!1 &785306560
 GameObject:
   m_ObjectHideFlags: 0
@@ -26343,7 +26344,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   decreaseSizeFactor: 0.9
   expandSizeFactor: 1.1
-  speed: 50
   targets:
   - {fileID: 888824972}
   - {fileID: 713952804}
@@ -26394,7 +26394,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   decreaseSizeFactor: 0.9
   expandSizeFactor: 1.1
-  speed: 1
   targets: []
   endPosition: []
   setupEndPositionBool: 0

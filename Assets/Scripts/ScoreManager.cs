@@ -18,7 +18,7 @@ public class ScoreManager : MonoBehaviour
     public void IncrementScore()
     {
         score++; // Increase the score by 1
-        UpdateScoreText(); // Update the UI text
+        UpdateScoreText(); // Update the UI text 
     }
 
     public void IncrementMisses()

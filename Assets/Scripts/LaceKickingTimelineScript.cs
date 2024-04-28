@@ -10,7 +10,7 @@ public class LaceKickingTimelineScript : MonoBehaviour
     public void play()
     {
         director.Play();
-        Time.timeScale = (float)0.5;
+        Time.timeScale = (float)1;
         Time.fixedDeltaTime = (float)0.01;
     }
 }

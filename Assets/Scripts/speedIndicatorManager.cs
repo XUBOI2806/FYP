@@ -1,76 +1,53 @@
 using UnityEngine;
 
-public class SpeedIndicatorScript : MonoBehaviour
+public class SpeedColorChanger : MonoBehaviour
 {
+    public Color minSpeedColor = Color.white; // Color for no speed
+    public Color maxSpeedColor = Color.blue; // Color for maximum speed
+    public float maxSpeed = 25f; // The speed at which the color will be maxSpeedColor
+    public int smoothingFactor = 3; // Number of frames to average the speed over
 
-    private float maxSpeed = 50000f;
-    public float maxSaturation = 1f;
-    public float minSaturation = 0.2f;
-
-    private Renderer renderer;
-
-    public float smoothingFactor = 0.5f;
-
-    private Vector3 previousPosition;
-    private float previousTime;
-    private Vector3 velocity;
+    private Renderer objRenderer;
+    private Vector3 lastPosition;
+    private float[] speedSamples;
+    private int sampleIndex;
 
     void Start()
     {
-        
-        renderer = GetComponent<Renderer>();
-
-        if (renderer == null)
-        {
-            Debug.LogError("Renderer not found.");
-            enabled = false; // Disable the script if essential components are missing
-        }
-        
-        previousPosition = transform.position;
-        previousTime = Time.time;
+        objRenderer = GetComponent<Renderer>();
+        lastPosition = transform.position;
+        speedSamples = new float[smoothingFactor];
+        sampleIndex = 0;
     }
 
-    void Update()
+    void FixedUpdate()
     {
-        // Calculate change in position
-        Vector3 currentPosition = transform.localPosition;
-        Vector3 deltaPosition = currentPosition - previousPosition;
+        // Calculate speed
+        float currentSpeed = Vector3.Distance(transform.position, lastPosition) / Time.fixedDeltaTime;
+        lastPosition = transform.position;
 
-        // Calculate change in time
-        float deltaTime = Time.time - previousTime;
+        // Store the current speed sample
+        speedSamples[sampleIndex] = currentSpeed;
+        sampleIndex = (sampleIndex + 1) % smoothingFactor;
 
+        // Calculate the average speed
+        float averageSpeed = 0f;
+        for (int i = 0; i < smoothingFactor; i++)
+        {
+            averageSpeed += speedSamples[i];
+        }
+        averageSpeed /= smoothingFactor;
+        Debug.Log(averageSpeed);
 
-        // Calculate smoothed velocity
-        velocity = Vector3.Lerp(velocity, deltaPosition / deltaTime, smoothingFactor);
+        // Clamp speed to maxSpeed
+        float clampedSpeed = Mathf.Clamp(averageSpeed, 0, maxSpeed);
 
-        // Update previous position and time for next frame
-        previousPosition = currentPosition;
-        previousTime = Time.time;
+        // Calculate color based on speed
+        float t = clampedSpeed / maxSpeed;
+        Color currentColor = Color.Lerp(minSpeedColor, maxSpeedColor, t);
 
-        Debug.Log(velocity.magnitude);
-
-        
-        if (renderer == null)
-            return;
-
-        // Calculate relative velocity with respect to the reference object
-        
-        float speed = transform.localPosition.magnitude / Time.deltaTime;
-        Debug.Log(speed);
-
-        // Calculate saturation based on velocity
-        float normalizedSpeed = Mathf.Clamp01(speed / maxSpeed);
-        float saturation = Mathf.Lerp(minSaturation, maxSaturation, normalizedSpeed);
-
-        // Calculate hue based on speed or any other desired parameter
-        float hue = Mathf.Lerp(0.33f, 0.66f, normalizedSpeed); // Example hue range
-
-        // Set the color using HSV
-        Color color = Color.HSVToRGB(hue, saturation, 1f);
-
-        // Apply the color to the material
-        renderer.material.color = color;
-        
+        // Apply color to the renderer
+        objRenderer.material.color = currentColor;
     }
-
+    
 }

@@ -13,6 +13,10 @@ public class LegPathRenderer : MonoBehaviour
     public string fileName = "positions.csv"; // Name of the output file
     public Vector3[] positions;
 
+    // cooldown
+    private float cooldown;
+    private float repeatRate = 0.02f;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -22,8 +26,13 @@ public class LegPathRenderer : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        ExportPositionsToCSV();
-   }
+        if(cooldown < 0)
+        {
+            ExportPositionsToCSV();
+            cooldown = repeatRate;
+        }
+        cooldown -= Time.deltaTime;
+    }
 
     public void ExportPositionsToCSV()
     {

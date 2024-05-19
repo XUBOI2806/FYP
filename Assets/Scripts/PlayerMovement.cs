@@ -180,6 +180,7 @@ public class PlayerMovement : MonoBehaviour
         handleTargetSpeed();
         handleZoom();
         handleSlowGame();
+        handleSpeedometer();
     }
 
     void onMovementInput(InputAction.CallbackContext ctx)
@@ -378,6 +379,11 @@ public class PlayerMovement : MonoBehaviour
             setTimeScale();
             slowGamePressed = false;
         }
+    }
+
+    virtual protected void handleSpeedometer()
+    {
+
     }
 }
 

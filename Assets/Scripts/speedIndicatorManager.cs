@@ -50,6 +50,11 @@ public class SpeedColorChanger : MonoBehaviour
         // Apply color to the renderer
         objRenderer.material.color = currentColor;
     }
+
+    public float getVelocity()
+    {
+        return Vector3.Distance(transform.position, lastPosition) / Time.fixedDeltaTime;
+    }
     
     public void changeTrackerColor()
     {

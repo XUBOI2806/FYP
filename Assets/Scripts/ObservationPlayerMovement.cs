@@ -1,13 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
+
 
 public class ObservationPlayerMovement : PlayerMovement
 {
     public GameObject LaceKickingTimelineController; // Reference to the LaceKickingTimelineController GameObject
 
     public GameObject[] trackers;
-    
+
+    public GameObject trackerSpeedometer;
+
+    public TextMeshProUGUI speedometerText;
+
     protected override void handleShoot()
     {
         // Check if the side kick button is pressed
@@ -47,6 +53,13 @@ public class ObservationPlayerMovement : PlayerMovement
             // Set the isLaceKicking animation parameter to false
             animator.SetBool(isLaceKickingHash, false);
         }
+    }
+
+
+    protected override void handleSpeedometer()
+    {
+        var speed = trackerSpeedometer.GetComponent<SpeedColorChanger>().getVelocity();
+        speedometerText.text = speed.ToString("F2"); // Format to 2 decimal places
     }
 
     void switchTrackerColor()

@@ -6,6 +6,7 @@ public class SpeedColorChanger : MonoBehaviour
     public Color maxSpeedColor = Color.blue; // Color for maximum speed
     public float maxSpeed = 25f; // The speed at which the color will be maxSpeedColor
     public int smoothingFactor = 3; // Number of frames to average the speed over
+    
 
     private Renderer objRenderer;
     private Vector3 lastPosition;
@@ -18,6 +19,7 @@ public class SpeedColorChanger : MonoBehaviour
         lastPosition = transform.position;
         speedSamples = new float[smoothingFactor];
         sampleIndex = 0;
+        
     }
 
     void FixedUpdate()
@@ -49,4 +51,18 @@ public class SpeedColorChanger : MonoBehaviour
         objRenderer.material.color = currentColor;
     }
     
+    public void changeTrackerColor()
+    {
+        /**
+         * Method to change the colour of the tracker 
+         */
+        if (maxSpeedColor == Color.blue)
+        {
+            maxSpeedColor = Color.red;
+        }
+        else
+        {
+            maxSpeedColor = Color.blue;
+        }
+    }
 }

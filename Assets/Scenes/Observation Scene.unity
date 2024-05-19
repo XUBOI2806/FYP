@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028352, g: 0.22571376, b: 0.3069224, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -5561,8 +5561,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 255426202}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0.96926504, z: -0, w: 0.24601886}
-  m_LocalPosition: {x: 0.42397022, y: 0.02700001, z: 1.3500004}
+  m_LocalRotation: {x: 0.16329437, y: 0.6704455, z: -0.15481026, w: 0.70701593}
+  m_LocalPosition: {x: -3.8599997, y: -0.143, z: -0.9090004}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -5674,11 +5674,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 259246877}
   m_CullTransparentMesh: 1
---- !u!1 &259880545 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: -3086436065929644917, guid: 4bcfcd43963b7cc44b7f2a9c390b4390, type: 3}
-  m_PrefabInstance: {fileID: 1261394998}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &259880546 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8169382868667117632, guid: 4bcfcd43963b7cc44b7f2a9c390b4390, type: 3}
@@ -21102,8 +21097,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 573864521}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0.96926504, z: -0, w: 0.24601886}
-  m_LocalPosition: {x: 0.42397022, y: 0.02700001, z: 1.3500004}
+  m_LocalRotation: {x: 0.16329437, y: 0.6704455, z: -0.15481026, w: 0.70701593}
+  m_LocalPosition: {x: -3.8599997, y: -0.143, z: -0.9090004}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -21283,7 +21278,6 @@ GameObject:
   - component: {fileID: 691910435}
   - component: {fileID: 691910434}
   - component: {fileID: 691910433}
-  - component: {fileID: 691910437}
   - component: {fileID: 691910436}
   m_Layer: 0
   m_Name: Knee Tracker
@@ -21378,34 +21372,7 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 691910431}
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
---- !u!54 &691910436
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 691910431}
-  serializedVersion: 4
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_CenterOfMass: {x: 0, y: 0, z: 0}
-  m_InertiaTensor: {x: 1, y: 1, z: 1}
-  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ImplicitCom: 1
-  m_ImplicitTensor: 1
-  m_UseGravity: 1
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
---- !u!114 &691910437
+--- !u!114 &691910436
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -21414,10 +21381,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 691910431}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1f84814b714b876468e4969e44acc473, type: 3}
+  m_Script: {fileID: 11500000, guid: 2f691b12d8c83984b957a822de43c21d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  leg: {fileID: 2124263174}
+  minSpeedColor: {r: 1, g: 1, b: 1, a: 1}
+  maxSpeedColor: {r: 0, g: 0, b: 1, a: 1}
+  maxSpeed: 25
+  smoothingFactor: 3
 --- !u!1 &713952804
 GameObject:
   m_ObjectHideFlags: 0
@@ -21676,6 +21646,10 @@ MonoBehaviour:
   targetController: {fileID: 0}
   mainCamera: {fileID: 0}
   LaceKickingTimelineController: {fileID: 2043543836}
+  trackers:
+  - {fileID: 1004101952}
+  - {fileID: 691910431}
+  - {fileID: 783813025}
 --- !u!4 &741140692 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 4bcfcd43963b7cc44b7f2a9c390b4390, type: 3}
@@ -21698,8 +21672,7 @@ GameObject:
   - component: {fileID: 783813029}
   - component: {fileID: 783813028}
   - component: {fileID: 783813027}
-  - component: {fileID: 783813031}
-  - component: {fileID: 783813032}
+  - component: {fileID: 783813030}
   m_Layer: 0
   m_Name: Hip Tracker
   m_TagString: Untagged
@@ -21793,7 +21766,7 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 783813025}
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
---- !u!114 &783813031
+--- !u!114 &783813030
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -21802,37 +21775,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 783813025}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1f84814b714b876468e4969e44acc473, type: 3}
+  m_Script: {fileID: 11500000, guid: 2f691b12d8c83984b957a822de43c21d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  leg: {fileID: 259880545}
---- !u!54 &783813032
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 783813025}
-  serializedVersion: 4
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_CenterOfMass: {x: 0, y: 0, z: 0}
-  m_InertiaTensor: {x: 1, y: 1, z: 1}
-  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ImplicitCom: 1
-  m_ImplicitTensor: 1
-  m_UseGravity: 1
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
+  minSpeedColor: {r: 1, g: 1, b: 1, a: 1}
+  maxSpeedColor: {r: 0, g: 0, b: 1, a: 1}
+  maxSpeed: 25
+  smoothingFactor: 3
 --- !u!1 &785306560
 GameObject:
   m_ObjectHideFlags: 0
@@ -49866,11 +49815,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ScoreManager: {fileID: 302760248}
   fractured: {fileID: 5170800724414860432, guid: 93f4518643e5d44aba5ed5978af85f0c, type: 3}
---- !u!1 &2124263174 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: -4332706925441422008, guid: 4bcfcd43963b7cc44b7f2a9c390b4390, type: 3}
-  m_PrefabInstance: {fileID: 1261394998}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2124382172
 GameObject:
   m_ObjectHideFlags: 0

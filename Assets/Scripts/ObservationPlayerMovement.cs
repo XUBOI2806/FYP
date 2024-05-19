@@ -5,6 +5,8 @@ using UnityEngine;
 public class ObservationPlayerMovement : PlayerMovement
 {
     public GameObject LaceKickingTimelineController; // Reference to the LaceKickingTimelineController GameObject
+
+    public GameObject[] trackers;
     
     protected override void handleShoot()
     {
@@ -44,6 +46,14 @@ public class ObservationPlayerMovement : PlayerMovement
             RightShoe.GetComponent<KickBall>().disableLaceKicking();
             // Set the isLaceKicking animation parameter to false
             animator.SetBool(isLaceKickingHash, false);
+        }
+    }
+
+    void switchTrackerColor()
+    {
+        foreach (var item in trackers)
+        {
+            item.GetComponent<SpeedColorChanger>().changeTrackerColor();
         }
     }
 }

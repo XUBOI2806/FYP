@@ -11,10 +11,4 @@ public class TurnSlowMo : MonoBehaviour
         Time.timeScale = currentTimeScale;
         Time.fixedDeltaTime = currentTimeScale * 0.02f;
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }

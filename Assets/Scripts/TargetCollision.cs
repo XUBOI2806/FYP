@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class backCollision : MonoBehaviour
+public class TargetCollision : MonoBehaviour
 {
     public ParticleSystem fireworks1;
     public ParticleSystem fireworks2;

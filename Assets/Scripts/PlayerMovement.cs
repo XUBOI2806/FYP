@@ -103,8 +103,7 @@ public class PlayerMovement : MonoBehaviour
         {
             restartPressed = ctx.ReadValueAsButton();
         };
-
-
+        
         // input for changing distances
         input.CharacterControls.SetPiece1.performed += ctx =>
         {
@@ -118,7 +117,6 @@ public class PlayerMovement : MonoBehaviour
         };
 
         // input for altering targets
-
         input.CharacterControls.MoveTarget.performed += ctx =>
         {
             moveTargetPressed = ctx.ReadValueAsButton();
@@ -134,6 +132,7 @@ public class PlayerMovement : MonoBehaviour
             targetDecreasePressed = ctx.ReadValueAsButton();
         };
 
+        // input for zooming
         input.CharacterControls.Zoomin.performed += ctx =>
         {
             zoomInPressed = ctx.ReadValueAsButton();
@@ -142,12 +141,14 @@ public class PlayerMovement : MonoBehaviour
         {
             zoomOutPressed = ctx.ReadValueAsButton();
         };
-        
+
+        // input for slowing game
         input.CharacterControls.SlowGame.performed += ctx =>
         {
             slowGamePressed = ctx.ReadValueAsButton();
         };
     }
+    
     void Start()
     {
         // Get the animator component within the Unity Project
@@ -157,10 +158,8 @@ public class PlayerMovement : MonoBehaviour
         isRunningHash = Animator.StringToHash("isRunning");
         isSideKickingHash = Animator.StringToHash("isSideKicking");
         isLaceKickingHash = Animator.StringToHash("isLaceKicking");
-
     }
-
-    // Update is called once per frame
+    
     void FixedUpdate()
     {
         // ad hoc fix to prevent player from sinking
@@ -178,12 +177,9 @@ public class PlayerMovement : MonoBehaviour
         handleTargetSizeDecrease();
         handleTargetMovement();
         /*handleTargetSizeIncrease();*/
-
         handleTargetSpeed();
         handleZoom();
         handleSlowGame();
-        
-
     }
 
     void onMovementInput(InputAction.CallbackContext ctx)
@@ -199,7 +195,6 @@ public class PlayerMovement : MonoBehaviour
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
             resetTimeScale();
-            
         }
     }
 
@@ -207,7 +202,6 @@ public class PlayerMovement : MonoBehaviour
     {
         if(sideKickPressed)
         {
-            Debug.Log("Side Kick Pressed");
             RightShoe.GetComponent<KickBall>().enableSideKicking();
             animator.SetBool(isSideKickingHash, true);
         }
@@ -218,7 +212,6 @@ public class PlayerMovement : MonoBehaviour
         }
         if(laceKickPressed)
         {
-            Debug.Log("Lace Kick Pressed");
             RightShoe.GetComponent<KickBall>().enableLaceKicking();
             animator.SetBool(isLaceKickingHash, true);
         }
@@ -233,44 +226,12 @@ public class PlayerMovement : MonoBehaviour
     {
         Vector3 currentPosition = transform.position;
         Vector3 newPosition = new Vector3(currentMovement.x, 0, currentMovement.y);
-
         Vector3 positionToLookAt = currentPosition + newPosition;
-
         transform.LookAt(positionToLookAt);
     }
+    
     void handleMovement()
     {
-        bool isRunning = animator.GetBool(isRunningHash);
-        bool isWalking = animator.GetBool(isWalkingHash);
-        /*
-        Debug.Log("Is running is " + isRunning);
-        Debug.Log("Is walking is " + isWalking);
-        Debug.Log("Movement pressed is " + movementPressed);
-        Debug.Log("Running pressed is " + runPressed);
-        */
-        /*
-        if (movementPressed && !isWalking)
-        {
-            animator.SetBool(isWalkingHash, true);
-        }
-
-        if (!movementPressed && isWalking)
-        {
-            animator.SetBool(isWalkingHash, false);
-        }
-        
-        if ((movementPressed && runPressed) && !isRunning)
-        {
-            animator.SetBool(isRunningHash, true);
-        }
-
-        if ((!movementPressed || !runPressed) && isRunning) 
-        {
-            animator.SetBool(isRunningHash, false);
-        }
-
-        */
-
         if (movementPressed)
         {
             animator.SetBool(isWalkingHash, true);
@@ -298,7 +259,6 @@ public class PlayerMovement : MonoBehaviour
             ballRigidBody.velocity = new Vector3(0, 0, 0);
             transform.position = FreeKickPosition;
             transform.rotation = FreeKickRotation;
-            
             setPiece1Pressed = false;
         }
 
@@ -316,7 +276,6 @@ public class PlayerMovement : MonoBehaviour
     void handleRandomise()
     {
         // Do the ranodmising here
-        
         if (randomisePressed)
         {
             targetController.randomiseTargets();
@@ -378,7 +337,6 @@ public class PlayerMovement : MonoBehaviour
 
     }
     
-
     private void OnDisable()
     {
         // enable character action map
@@ -389,15 +347,12 @@ public class PlayerMovement : MonoBehaviour
     {
         if (zoomInPressed)
         {
-            Debug.Log("Zoom in");
-
             mainCamera.fieldOfView = 40;
             zoomInPressed = false;
         }
 
         if (zoomOutPressed)
         {
-            Debug.Log("Zoom Out");
             mainCamera.fieldOfView = 80;
             zoomOutPressed = false;
         }
@@ -406,9 +361,7 @@ public class PlayerMovement : MonoBehaviour
     private void setTimeScale()
     {
         currentTimeScale = slowdownFactor * currentTimeScale;
-        Debug.Log(slowdownFactor);
         Time.timeScale = currentTimeScale;
-        Debug.Log(currentTimeScale);
         Time.fixedDeltaTime = currentTimeScale * 0.02f;
     }
 
@@ -422,8 +375,6 @@ public class PlayerMovement : MonoBehaviour
     {
         if (slowGamePressed)
         {
-            Debug.Log("slow Game");
-
             setTimeScale();
             slowGamePressed = false;
         }

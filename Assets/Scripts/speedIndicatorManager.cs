@@ -37,7 +37,6 @@ public class SpeedColorChanger : MonoBehaviour
             averageSpeed += speedSamples[i];
         }
         averageSpeed /= smoothingFactor;
-        Debug.Log(averageSpeed);
 
         // Clamp speed to maxSpeed
         float clampedSpeed = Mathf.Clamp(averageSpeed, 0, maxSpeed);

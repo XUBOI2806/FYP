@@ -4,20 +4,18 @@ using UnityEngine;
 
 public class TargetController : MonoBehaviour
 {
-    public float decreaseSizeFactor = 0.9f;
-    public float expandSizeFactor = 1.1f;
+    public float decreaseSizeFactor = 0.9f; // Factor to decrease the size of the targets
+    public float expandSizeFactor = 1.1f; // Factor to increase the size of the targets
 
-    private float speed = 1f;
-    public GameObject[] targets;
-    public Vector3[] endPosition;
-    public bool setupEndPositionBool;
-    public Vector3[] startPosition;
-    public bool setupStartPositionBool;
-    public bool[] moveToEnd;
-    public bool setupBool;
-
-
-
+    private float speed = 1f; // Speed of target movement
+    public GameObject[] targets; // Array of target GameObjects
+    public Vector3[] endPosition; // Array of end positions for each target
+    public bool setupEndPositionBool; // Flag to check if end positions are set up
+    public Vector3[] startPosition; // Array of start positions for each target
+    public bool setupStartPositionBool; // Flag to check if start positions are set up
+    public bool[] moveToEnd; // Array of flags to determine if targets should move to end positions
+    public bool setupBool; // Flag to check if setup for moveToEnd array is done
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -34,21 +32,20 @@ public class TargetController : MonoBehaviour
         setupMoveBoolArray();
     }
 
-    // randomise function for all targets
+    // Randomize function for all targets
     public void randomiseTargets()
     {
         foreach(GameObject target in targets)
         {
+            // Set each target to a random position within specified bounds
             target.transform.localPosition = new Vector3(Random.Range(-3.16f, 3.163f), Random.Range(0.484f, 1.955f), 1.117f);
         }
-        setupStartPositionBool = true;
+        setupStartPositionBool = true; // Reset the start position setup flag
     }
 
+    // Function to get the index number for a target given its name
     private int getTargetIndex(string targetName)
     {
-        /**
-         * function to get index number for target given its name
-         */
         switch (targetName)
         {
             case "Bottom Left Target":
@@ -60,72 +57,64 @@ public class TargetController : MonoBehaviour
             case "Top Right Target":
                 return 3;
             default:
-                return -1;
+                return -1; // Return -1 if the target name is not recognized
         }
     }
 
+    // Method used to set random end positions for each target
     public void setupEndPosition()
     {
-        /**
-         * Method used to set random end positions for each target
-         */
         if (setupEndPositionBool)
         {
-            endPosition = new Vector3[targets.Length];
+            endPosition = new Vector3[targets.Length]; // Initialize the endPosition array
             foreach (GameObject target in targets)
             {
                 int i = getTargetIndex(target.name);
                 if (i != -1)
                 {
+                    // Set a random end position within specified bounds
                     endPosition[i] = new Vector3(Random.Range(-3.16f, 3.163f), Random.Range(0.484f, 1.955f), 1.117f);
                 }
             }
-            setupEndPositionBool = false;
+            setupEndPositionBool = false; // Reset the end position setup flag
         }
     }
 
+    // Method to set the moveToEnd array to all true
     public void setupMoveBoolArray()
     {
-        /**
-         * Method to set bool array to all true
-         */
         if (setupBool)
         {
-            moveToEnd = new bool[targets.Length];
+            moveToEnd = new bool[targets.Length]; // Initialize the moveToEnd array
             for (int i = 0; i < moveToEnd.Length; i++)
             {
-                moveToEnd[i] = true;
+                moveToEnd[i] = true; // Set all elements to true
             }
+            setupBool = false; // Reset the setup flag
         }
-        setupBool = false;
     }
 
+    // Method to initialize start positions
     public void setupStartPosition()
     {
-        /**
-         * Method to initialise start position
-         */
         if (setupStartPositionBool)
         {
-            startPosition = new Vector3[targets.Length];
+            startPosition = new Vector3[targets.Length]; // Initialize the startPosition array
             foreach(GameObject target in targets)
             {
                 int i = getTargetIndex(target.name);
                 if(i != -1)
                 {
-                    startPosition[i] = target.transform.localPosition;
+                    startPosition[i] = target.transform.localPosition; // Set the start position to the current local position
                 }
             }
-            setupStartPositionBool = false;
+            setupStartPositionBool = false; // Reset the start position setup flag
         }
     }
 
-    // move targets from x = 3 to x = -3
+    // Method to handle target movement
     public void moveTarget()
     {
-        /**
-         * Method to handle target movement
-         */
         foreach (GameObject target in targets)
         {
             if (target != null)
@@ -137,54 +126,50 @@ public class TargetController : MonoBehaviour
                 Vector3 direction = destination - target.transform.localPosition;
                 direction.Normalize();
 
-                // move the object towards the current waypoint
+                // Move the object towards the current waypoint
                 target.transform.localPosition += direction * speed * Time.deltaTime;
 
+                // Check the distance to the current waypoint
                 float distance  = Vector3.Distance(target.transform.localPosition, destination);
                 if (distance < 0.1f) 
                 {
-                    moveToEnd[i] = !moveToEnd[i];
+                    moveToEnd[i] = !moveToEnd[i]; // Toggle the move direction
                 }
             }
         }
     }
 
+    // Increase the movement speed of the targets
     public void increaseTargetMovementSpeed()
     {
         speed += 1;
     }
 
+    // Decrease the movement speed of the targets
     public void decreaseTargetMovementSpeed()
     {
-       
         if (speed > 0)
         {
             speed -= 1;
         }
     }
 
-
-
+    // Shrink the targets
     public void ShrinkTargets()
     {
         foreach (GameObject target in targets)
         {
-            
-            // Scale down the target by resizeFactor
-            target.transform.localScale *= decreaseSizeFactor;
-            Debug.Log("ShrinkTargets()");
-            
+            target.transform.localScale *= decreaseSizeFactor; // Scale down the target
         }
     }
+
+    // Expand the targets
     public void ExpandTargets()
     {
         foreach (GameObject target in targets)
         {
-            
-            // Scale down the target by resizeFactor
+            // Scale up the target
             target.transform.localScale *= expandSizeFactor;
-            Debug.Log("ShrinkTargets()");
-            
         }
     }
 }
